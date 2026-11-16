@@ -19,9 +19,9 @@ The four-tool MCP service is live on Vercel and passes local and public unauthen
 | Support URL | https://elec.training/contact-us/ — proposed existing contact page |
 | Privacy URL | https://elec.training/privacy-policy/ — coverage review outstanding |
 | Terms URL | No suitable approved working URL verified; publisher input required |
-| Five positive tests | 5/5 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT evaluation not run |
+| Five positive tests | 5/5 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT beginner answer PASS with plugin activity observed; four cases pending |
 | Three negative tests | 3/3 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT evaluation not run |
-| Demo URL | Not recorded; production ChatGPT session required; script prepared |
+| Demo URL | Not recorded; manual ChatGPT testing has started; script prepared |
 | OpenAI automated scan | NOT RUN |
 | Ready for submission | NO |
 
@@ -44,6 +44,8 @@ Production deployment `dpl_BrnidUuXTVTh56oUVW3BdNVMpQae` is READY, targeting pro
 The post-deployment Vercel error-log query returned no logs. This is not proof of comprehensive monitoring; confirm infrastructure logging and retention before submission.
 
 These results verify the service, public client access from the development network and curated mappings, not ChatGPT’s actual tool selection, displayed answer quality, OpenAI’s scan, hosting retention or business identity. `docs/test-results.json` contains local response evidence and `docs/production-test-results.json` contains the public endpoint results.
+
+Manual ChatGPT testing has since started using screenshots provided by the user. The first beginner response passes the expected content checks and expanded activity visibly shows plugin invocation. The raw tool name and arguments are not exposed in that screenshot. See `docs/chatgpt-test-results.md` for the evidence and remaining cases. The private test listing currently shows an individual developer name, Other category and no website/description; correct the listing and verified publisher identity before submission.
 
 ## Access and evidence outstanding
 

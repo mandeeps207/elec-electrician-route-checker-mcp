@@ -19,7 +19,7 @@ The four-tool MCP service is live on Vercel and passes local and public unauthen
 | Support URL | https://elec.training/contact-us/ — proposed existing contact page |
 | Privacy URL | https://elec.training/privacy-policy/ — coverage review outstanding |
 | Terms URL | No suitable approved working URL verified; publisher input required |
-| Five positive tests | 5/5 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT beginner answer PASS with plugin activity observed; four cases pending |
+| Five positive tests | 5/5 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT beginner and Level 3 answer content PASS; Level 3 tool use and reported availability alert unresolved; three cases pending |
 | Three negative tests | 3/3 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT evaluation not run |
 | Demo URL | Not recorded; manual ChatGPT testing has started; script prepared |
 | OpenAI automated scan | NOT RUN |

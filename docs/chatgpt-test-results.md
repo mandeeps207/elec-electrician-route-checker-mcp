@@ -16,11 +16,19 @@ Plugin invocation: OBSERVED. Expanded Worked for 11s activity shows the Elec Tra
 
 ## Remaining cases
 
-Positive cases 2 to 5 and negative cases 1 to 3: NOT YET OBSERVED in ChatGPT. Their automated production MCP client checks already pass, but those results do not replace ChatGPT answer and tool-selection evidence.
+Positive cases 2, 4 and 5 and negative cases 1 to 3: NOT YET OBSERVED in ChatGPT. Their automated production MCP client checks already pass, but those results do not replace ChatGPT answer and tool-selection evidence.
 
 Next requested prompt: I've completed Level 3 but I don't have electrical site experience. What should I do?
 
 Expected behaviour: explain that technical Level 3 alone does not establish occupational competence, identify suitable real work and workplace-based NVQ progression, describe later external assessment, and preserve the narrow Level 3 NVQ placement guarantee and separate support charges if Elec Training support is mentioned. Confirm the exact Level 3 award where necessary.
+
+## Positive case 3 and reported availability alert
+
+The user supplied a screenshot of the Level 3/no-site-experience answer. Answer content: PASS. It distinguishes a technical diploma from occupational competence, recommends suitable supervised work and an assessor-led NVQ evidence plan, checks exact qualification details, rejects job title or workshop exercises as sufficient evidence, identifies external NET assessment, and preserves the restricted paid-placement guarantee and separately charged support. It does not promise permanent employment or paid work for every learner. Expanded tool activity for this turn has not yet been supplied.
+
+The user also reported a popup saying some tools are temporarily unavailable. The popup itself is not visible in the supplied screenshot. Connection reliability remains unresolved; correct answer text does not demonstrate that the tool call succeeded on this turn.
+
+Diagnostic rerun: the public production MCP client review again passed all five positive and three negative cases. Requests including Origin https://chatgpt.com returned HTTP 200 for initialization (432 ms) and tools/list (306 ms), discovering four tools with no protocol error. Vercel's error-log query returned no logs, which does not exclude every infrastructure or client-side problem. The OpenAI status page reported operational status at the time checked; aggregate status cannot exclude account/session-specific issues. No server change was made on the basis of the generic alert. Ask for the expanded Worked for 8s activity and exact popup details before assigning a cause.
 
 ## Outstanding evidence
 

@@ -13,6 +13,8 @@ Electrician Route Checker is a read-only educational MCP service published by **
 
 Every tool is annotated read-only, non-destructive, idempotent and bounded (`openWorldHint: false`). The tools do not browse or initiate external actions.
 
+Production MCP endpoint: **https://elec-electrician-route-checker.vercel.app/mcp**. Hosting: Vercel, project `elec-electrician-route-checker` in `mkwebtecindias-projects`. The stable production alias is used in `plugin/mcp.json`; do not replace it with a deployment-specific preview address. Public unauthenticated MCP tests passed on 17 November 2026. ChatGPT and submission validation remain pending.
+
 ## Development
 
 Use Node.js 22, then `npm ci`, `npm test`, `npm run test:review` and `npm start`. The local MCP endpoint is `http://localhost:3000/mcp`. The service uses the official MCP SDK and stateless Streamable HTTP with JSON responses. No API key or database is required. `npm audit` checks the locked dependency tree.

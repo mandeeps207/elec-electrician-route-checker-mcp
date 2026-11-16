@@ -1,0 +1,10 @@
+node_modules/
+.vercel/
+.env*
+!.env.example
+*.docx
+research/
+dist/
+artifacts/
+*.zip
+*.log

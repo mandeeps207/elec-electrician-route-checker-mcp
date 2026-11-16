@@ -1,0 +1,1103 @@
+{
+  "endpoint": "http://127.0.0.1:63263/mcp",
+  "tested_at": "2026-11-16T21:34:36.818Z",
+  "test_layer": "Real MCP SDK client tool calls with curated input mappings. Does not verify ChatGPT tool selection or natural-language answers.",
+  "tools": [
+    {
+      "name": "get_electrician_route",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "starting_point": {
+            "type": "string",
+            "enum": [
+              "complete_beginner",
+              "level_2_completed",
+              "level_3_completed",
+              "already_working_electrical",
+              "construction_or_other_trade",
+              "unsure"
+            ]
+          },
+          "existing_qualifications": {
+            "default": [],
+            "maxItems": 8,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "none",
+                "level_2_technical",
+                "level_3_technical",
+                "18th_edition",
+                "level_3_nvq",
+                "am2",
+                "other_or_overseas",
+                "unsure"
+              ]
+            }
+          },
+          "electrical_work_experience": {
+            "default": "unsure",
+            "type": "string",
+            "enum": [
+              "none",
+              "some",
+              "currently_working",
+              "significant_experience",
+              "unsure"
+            ]
+          },
+          "currently_working_in_electrical": {
+            "default": null,
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "study_preference": {
+            "default": "unsure",
+            "type": "string",
+            "enum": [
+              "full_time",
+              "blended",
+              "flexible",
+              "unsure"
+            ]
+          },
+          "jurisdiction": {
+            "default": "unsure",
+            "type": "string",
+            "enum": [
+              "england",
+              "scotland",
+              "wales",
+              "northern_ireland",
+              "unsure"
+            ]
+          }
+        },
+        "required": [
+          "starting_point"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "fact_base_date": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "important_caveats": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "provenance": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "current_stage": {
+            "type": "string"
+          },
+          "likely_next_step": {
+            "type": "string"
+          },
+          "high_level_route": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "workplace_requirement": {
+            "type": "string"
+          },
+          "later_assessment_information": {
+            "type": "string"
+          },
+          "questions_to_resolve": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "study_options": {
+            "type": "string"
+          },
+          "provider_support": {
+            "type": "object",
+            "properties": {
+              "general": {
+                "type": "string"
+              },
+              "guarantee": {
+                "type": "string"
+              },
+              "limits": {
+                "type": "string"
+              },
+              "fees": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "general",
+              "guarantee",
+              "limits",
+              "fees"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "fact_base_date",
+          "scope",
+          "important_caveats",
+          "sources",
+          "current_stage",
+          "likely_next_step",
+          "high_level_route",
+          "explanation",
+          "workplace_requirement",
+          "later_assessment_information",
+          "questions_to_resolve",
+          "study_options"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "explain_electrical_stage",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "enum": [
+              "Level 2",
+              "Level 3",
+              "18th Edition",
+              "Level 3 NVQ",
+              "workplace evidence",
+              "AM2",
+              "ECS Gold Card"
+            ]
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "fact_base_date": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "important_caveats": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "provenance": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "topic": {
+            "type": "string"
+          },
+          "what_it_is": {
+            "type": "string"
+          },
+          "what_it_does": {
+            "type": "string"
+          },
+          "what_it_does_not_prove": {
+            "type": "string"
+          },
+          "where_it_fits": {
+            "type": "string"
+          },
+          "likely_next_stage": {
+            "type": "string"
+          },
+          "external_assessment": {
+            "type": "string"
+          },
+          "provider_support": {
+            "type": "object",
+            "properties": {
+              "general": {
+                "type": "string"
+              },
+              "guarantee": {
+                "type": "string"
+              },
+              "limits": {
+                "type": "string"
+              },
+              "fees": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "general",
+              "guarantee",
+              "limits",
+              "fees"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "fact_base_date",
+          "scope",
+          "important_caveats",
+          "sources",
+          "topic",
+          "what_it_is",
+          "what_it_does",
+          "what_it_does_not_prove",
+          "where_it_fits",
+          "likely_next_stage"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "check_nvq_progression",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "technical_training_stage": {
+            "type": "string",
+            "enum": [
+              "none",
+              "level_2",
+              "level_3_technical",
+              "other_or_overseas",
+              "unsure"
+            ]
+          },
+          "currently_working_in_electrical": {
+            "default": null,
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "workplace_experience": {
+            "default": "unsure",
+            "type": "string",
+            "enum": [
+              "none",
+              "some",
+              "currently_working",
+              "significant_experience",
+              "unsure"
+            ]
+          },
+          "existing_nvq_progress": {
+            "default": "unsure",
+            "type": "string",
+            "enum": [
+              "not_started",
+              "in_progress",
+              "evidence_gaps",
+              "completed",
+              "unsure"
+            ]
+          }
+        },
+        "required": [
+          "technical_training_stage"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "fact_base_date": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "important_caveats": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "provenance": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "current_position": {
+            "type": "string"
+          },
+          "workplace_evidence_likely_required": {
+            "type": "boolean"
+          },
+          "workplace_requirement": {
+            "type": "string"
+          },
+          "assessment_process": {
+            "type": "string"
+          },
+          "possible_next_steps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "experience_context": {
+            "type": "string"
+          },
+          "provider_support": {
+            "type": "object",
+            "properties": {
+              "general": {
+                "type": "string"
+              },
+              "guarantee": {
+                "type": "string"
+              },
+              "limits": {
+                "type": "string"
+              },
+              "fees": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "general",
+              "guarantee",
+              "limits",
+              "fees"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "fact_base_date",
+          "scope",
+          "important_caveats",
+          "sources",
+          "current_position",
+          "workplace_evidence_likely_required",
+          "workplace_requirement",
+          "assessment_process",
+          "possible_next_steps",
+          "experience_context"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "compare_electrician_routes",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "routes": {
+            "maxItems": 4,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "apprenticeship",
+                "college",
+                "t_level",
+                "private_adult_training"
+              ]
+            }
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "fact_base_date": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "important_caveats": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "provenance": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "conclusion": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "route": {
+                  "type": "string"
+                },
+                "typical_learner": {
+                  "type": "string"
+                },
+                "employment_dependency": {
+                  "type": "string"
+                },
+                "flexibility": {
+                  "type": "string"
+                },
+                "technical_training": {
+                  "type": "string"
+                },
+                "workplace_competence": {
+                  "type": "string"
+                },
+                "adult_suitability": {
+                  "type": "string"
+                },
+                "limitations": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "route",
+                "typical_learner",
+                "employment_dependency",
+                "flexibility",
+                "technical_training",
+                "workplace_competence",
+                "adult_suitability",
+                "limitations"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "adult_non_apprenticeship_route": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "later_assessment_information": {
+            "type": "string"
+          },
+          "decision_factors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "fact_base_date",
+          "scope",
+          "important_caveats",
+          "sources",
+          "conclusion",
+          "routes",
+          "adult_non_apprenticeship_route",
+          "later_assessment_information",
+          "decision_factors"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      }
+    }
+  ],
+  "positive": [
+    {
+      "prompt": "I'm 35, have no electrical qualifications and want to become an electrician. Where do I start?",
+      "tool": "get_electrician_route",
+      "arguments": {
+        "starting_point": "complete_beginner",
+        "existing_qualifications": [
+          "none"
+        ],
+        "electrical_work_experience": "none",
+        "currently_working_in_electrical": false
+      },
+      "expected_behavior": "Recognise a complete beginner, explain Level 2 and the high-level adult route, and distinguish technical training from workplace competence.",
+      "status": "PASS",
+      "missing": [],
+      "output": {
+        "fact_base_date": "2026-11-17",
+        "scope": "High-level UK route guidance, mainly the adult installation pathway in England",
+        "important_caveats": [
+          "This is high-level educational guidance, not an award, assessment decision or confirmation of ECS eligibility.",
+          "Classroom or technical qualifications alone do not demonstrate full occupational competence.",
+          "The route shown mainly describes an adult installation-electrician pathway in England. Scotland, Wales and Northern Ireland, other occupations, overseas qualifications and experienced-worker routes can differ. Check the relevant awarding body, NET and ECS or SJIB requirements.",
+          "The exact qualification title, number, units and assessment route must be checked before enrolment or an ECS application. Some Level 3 qualifications are technical diplomas; others include competence.",
+          "Workplace evidence and technical learning may overlap. The route is not a promise of a fixed duration or employment outcome."
+        ],
+        "sources": [
+          {
+            "title": "Elec Training approved project fact base",
+            "date": "2026-11-17",
+            "provenance": "Publisher supplied project brief; provider claims are not independent outcome verification."
+          },
+          {
+            "title": "ECS qualification routes",
+            "url": "https://www.ecscard.org.uk/content/How-do-I-become-qualified-as-an-Electrician"
+          },
+          {
+            "title": "NET assessment guidance",
+            "url": "https://www.netservices.org.uk/faq/"
+          }
+        ],
+        "current_stage": "complete_beginner",
+        "likely_next_step": "Explore an adult Level 2 beginner course or an employed apprenticeship, depending on your circumstances.",
+        "high_level_route": [
+          "Level 2 technical training",
+          "Level 3 technical training",
+          "18th Edition if required and not already held",
+          "Suitable workplace experience",
+          "Workplace-based Level 3 NVQ",
+          "External AM2 at an approved NET centre",
+          "Apply for the appropriate ECS Gold Card if all requirements are met"
+        ],
+        "explanation": "Adults and career changers can start without electrical experience. A non-apprenticeship route is possible through technical training followed by workplace competence assessment. Experience in another trade does not itself prove electrical competence. Elec Training’s Level 2 beginner route is for adults aged 18+ and needs no GCSEs or prior electrical qualifications.",
+        "workplace_requirement": "Suitable real electrical work is needed for workplace competence evidence. An assessor must check the actual tasks, range of work, supervision and evidence against the qualification; a job title or workshop exercises alone are insufficient.",
+        "later_assessment_information": "AM2 is external and taken at an approved NET assessment centre. Elec Training does not deliver AM2. Apprenticeship and experienced-worker pathways may use AM2S or AM2E; confirm the correct assessment with NET and your assessor. Once you have completed your Level 3 NVQ, passed the external AM2 assessment and met the remaining ECS requirements, you can apply for the appropriate ECS Gold Card. Check the accepted qualification combination, current wiring-regulations requirement and ECS health, safety and environmental requirement. Eligibility is not automatic.",
+        "questions_to_resolve": [
+          "Check the qualification and card route for your UK nation; in Scotland consult the relevant Scottish framework and SJIB."
+        ],
+        "study_options": "Compare full-time, blended and flexible study against practical attendance, employment and workplace evidence needs."
+      }
+    },
+    {
+      "prompt": "I've finished Level 2 Electrical Installation. What comes next?",
+      "tool": "get_electrician_route",
+      "arguments": {
+        "starting_point": "level_2_completed",
+        "existing_qualifications": [
+          "level_2_technical"
+        ]
+      },
+      "expected_behavior": "Explain suitable Level 3, 18th Edition if needed, workplace/NVQ progression, external AM2 and conditional ECS card eligibility.",
+      "status": "PASS",
+      "missing": [],
+      "output": {
+        "fact_base_date": "2026-11-17",
+        "scope": "High-level UK route guidance, mainly the adult installation pathway in England",
+        "important_caveats": [
+          "This is high-level educational guidance, not an award, assessment decision or confirmation of ECS eligibility.",
+          "Classroom or technical qualifications alone do not demonstrate full occupational competence.",
+          "The route shown mainly describes an adult installation-electrician pathway in England. Scotland, Wales and Northern Ireland, other occupations, overseas qualifications and experienced-worker routes can differ. Check the relevant awarding body, NET and ECS or SJIB requirements.",
+          "The exact qualification title, number, units and assessment route must be checked before enrolment or an ECS application. Some Level 3 qualifications are technical diplomas; others include competence.",
+          "Workplace evidence and technical learning may overlap. The route is not a promise of a fixed duration or employment outcome."
+        ],
+        "sources": [
+          {
+            "title": "Elec Training approved project fact base",
+            "date": "2026-11-17",
+            "provenance": "Publisher supplied project brief; provider claims are not independent outcome verification."
+          },
+          {
+            "title": "ECS qualification routes",
+            "url": "https://www.ecscard.org.uk/content/How-do-I-become-qualified-as-an-Electrician"
+          },
+          {
+            "title": "NET assessment guidance",
+            "url": "https://www.netservices.org.uk/faq/"
+          }
+        ],
+        "current_stage": "level_2_completed",
+        "likely_next_step": "Check your Level 2 certificate and progress to suitable Level 3 technical training.",
+        "high_level_route": [
+          "Level 3 technical training",
+          "18th Edition if required and not already held",
+          "Suitable workplace experience",
+          "Workplace-based Level 3 NVQ",
+          "External AM2 at an approved NET centre",
+          "Apply for the appropriate ECS Gold Card if all requirements are met"
+        ],
+        "explanation": "Level 2 provides a technical foundation. Level 3 develops that knowledge, with 18th Edition if needed, then suitable workplace experience and workplace-based Level 3 NVQ progression. Technical study does not replace competence assessment.",
+        "workplace_requirement": "Suitable real electrical work is needed for workplace competence evidence. An assessor must check the actual tasks, range of work, supervision and evidence against the qualification; a job title or workshop exercises alone are insufficient.",
+        "later_assessment_information": "AM2 is external and taken at an approved NET assessment centre. Elec Training does not deliver AM2. Apprenticeship and experienced-worker pathways may use AM2S or AM2E; confirm the correct assessment with NET and your assessor. Once you have completed your Level 3 NVQ, passed the external AM2 assessment and met the remaining ECS requirements, you can apply for the appropriate ECS Gold Card. Check the accepted qualification combination, current wiring-regulations requirement and ECS health, safety and environmental requirement. Eligibility is not automatic.",
+        "questions_to_resolve": [
+          "Check the qualification and card route for your UK nation; in Scotland consult the relevant Scottish framework and SJIB."
+        ],
+        "study_options": "Compare full-time, blended and flexible study against practical attendance, employment and workplace evidence needs."
+      }
+    },
+    {
+      "prompt": "I've completed Level 3 but I don't have electrical site experience. What should I do?",
+      "tool": "get_electrician_route",
+      "arguments": {
+        "starting_point": "level_3_completed",
+        "existing_qualifications": [
+          "level_3_technical"
+        ],
+        "electrical_work_experience": "none",
+        "currently_working_in_electrical": false
+      },
+      "expected_behavior": "Clarify the exact Level 3 award, explain technical study alone is insufficient, suitable real work, NVQ competence progression and the limited Elec Training placement guarantee with separate support charges.",
+      "status": "PASS",
+      "missing": [],
+      "output": {
+        "fact_base_date": "2026-11-17",
+        "scope": "High-level UK route guidance, mainly the adult installation pathway in England",
+        "important_caveats": [
+          "This is high-level educational guidance, not an award, assessment decision or confirmation of ECS eligibility.",
+          "Classroom or technical qualifications alone do not demonstrate full occupational competence.",
+          "The route shown mainly describes an adult installation-electrician pathway in England. Scotland, Wales and Northern Ireland, other occupations, overseas qualifications and experienced-worker routes can differ. Check the relevant awarding body, NET and ECS or SJIB requirements.",
+          "The exact qualification title, number, units and assessment route must be checked before enrolment or an ECS application. Some Level 3 qualifications are technical diplomas; others include competence.",
+          "Workplace evidence and technical learning may overlap. The route is not a promise of a fixed duration or employment outcome."
+        ],
+        "sources": [
+          {
+            "title": "Elec Training approved project fact base",
+            "date": "2026-11-17",
+            "provenance": "Publisher supplied project brief; provider claims are not independent outcome verification."
+          },
+          {
+            "title": "ECS qualification routes",
+            "url": "https://www.ecscard.org.uk/content/How-do-I-become-qualified-as-an-Electrician"
+          },
+          {
+            "title": "NET assessment guidance",
+            "url": "https://www.netservices.org.uk/faq/"
+          }
+        ],
+        "current_stage": "level_3_completed",
+        "likely_next_step": "Confirm your exact Level 3 qualification and plan suitable electrical work and Level 3 NVQ competence progression with an assessor.",
+        "high_level_route": [
+          "18th Edition if required and not already held",
+          "Suitable workplace experience",
+          "Workplace-based Level 3 NVQ",
+          "External AM2 at an approved NET centre",
+          "Apply for the appropriate ECS Gold Card if all requirements are met"
+        ],
+        "explanation": "No: completing Level 3 technical/classroom training does not automatically make you a fully qualified electrician. Workplace experience, workplace-based Level 3 NVQ assessment and later external AM2 remain relevant to this route.",
+        "workplace_requirement": "Suitable real electrical work is needed for workplace competence evidence. An assessor must check the actual tasks, range of work, supervision and evidence against the qualification; a job title or workshop exercises alone are insufficient.",
+        "later_assessment_information": "AM2 is external and taken at an approved NET assessment centre. Elec Training does not deliver AM2. Apprenticeship and experienced-worker pathways may use AM2S or AM2E; confirm the correct assessment with NET and your assessor. Once you have completed your Level 3 NVQ, passed the external AM2 assessment and met the remaining ECS requirements, you can apply for the appropriate ECS Gold Card. Check the accepted qualification combination, current wiring-regulations requirement and ECS health, safety and environmental requirement. Eligibility is not automatic.",
+        "questions_to_resolve": [
+          "Check the qualification and card route for your UK nation; in Scotland consult the relevant Scottish framework and SJIB."
+        ],
+        "study_options": "Compare full-time, blended and flexible study against practical attendance, employment and workplace evidence needs.",
+        "provider_support": {
+          "general": "Elec Training uses its UK-wide employer network and dedicated recruitment teams to support learners into paid electrical work.",
+          "guarantee": "Elec Training guarantees a paid electrical work placement for Level 3 NVQ learners who need the workplace experience required to complete their qualification.",
+          "limits": "This does not guarantee paid work for every learner or permanent employment. Recruitment / employer-placement support is charged separately where required; do not assume it is included in the base NVQ fee.",
+          "fees": "Publisher-approved price as at 17 November 2026: base Level 3 NVQ £2,249 inc VAT; on-site assessor visits £250 per visit where required. Recruitment / employer-placement support is charged separately where required. Confirm current fees and placement terms directly before committing."
+        }
+      }
+    },
+    {
+      "prompt": "Can I become an electrician without doing an apprenticeship?",
+      "tool": "compare_electrician_routes",
+      "arguments": {},
+      "expected_behavior": "Answer yes, explain the adult non-apprenticeship route, workplace competence, later NVQ, external AM2 and ECS progression; do not declare one route universally best.",
+      "status": "PASS",
+      "missing": [],
+      "output": {
+        "fact_base_date": "2026-11-17",
+        "scope": "High-level UK route guidance, mainly the adult installation pathway in England",
+        "important_caveats": [
+          "This is high-level educational guidance, not an award, assessment decision or confirmation of ECS eligibility.",
+          "Classroom or technical qualifications alone do not demonstrate full occupational competence.",
+          "The route shown mainly describes an adult installation-electrician pathway in England. Scotland, Wales and Northern Ireland, other occupations, overseas qualifications and experienced-worker routes can differ. Check the relevant awarding body, NET and ECS or SJIB requirements.",
+          "The exact qualification title, number, units and assessment route must be checked before enrolment or an ECS application. Some Level 3 qualifications are technical diplomas; others include competence.",
+          "Workplace evidence and technical learning may overlap. The route is not a promise of a fixed duration or employment outcome."
+        ],
+        "sources": [
+          {
+            "title": "Elec Training approved project fact base",
+            "date": "2026-11-17",
+            "provenance": "Publisher supplied project brief; provider claims are not independent outcome verification."
+          },
+          {
+            "title": "ECS qualification routes",
+            "url": "https://www.ecscard.org.uk/content/How-do-I-become-qualified-as-an-Electrician"
+          },
+          {
+            "title": "NET assessment guidance",
+            "url": "https://www.netservices.org.uk/faq/"
+          }
+        ],
+        "conclusion": "Yes, a non-apprenticeship route is possible. Choose the best route for your circumstances; no route is universally best. Technical training does not remove workplace competence requirements.",
+        "routes": [
+          {
+            "route": "apprenticeship",
+            "typical_learner": "New entrants including adults with a suitable employed apprenticeship opportunity.",
+            "employment_dependency": "Requires an employer and the relevant apprenticeship arrangement.",
+            "flexibility": "Work and training schedules are agreed with the employer and provider.",
+            "technical_training": "Structured underpinning technical learning.",
+            "workplace_competence": "Workplace learning and competence assessment within the apprenticeship.",
+            "adult_suitability": "Can suit adult career changers when an employed opportunity and funding arrangements fit.",
+            "limitations": "Availability, duration, funding and assessment differ by UK nation; Elec Training does not offer apprenticeships."
+          },
+          {
+            "route": "college",
+            "typical_learner": "Learners who need a structured technical foundation.",
+            "employment_dependency": "A technical course may be started without electrical employment; later competence evidence needs suitable real work.",
+            "flexibility": "Timetables and adult provision vary by college.",
+            "technical_training": "Check whether the course is Level 2 or Level 3 technical study and its exact award.",
+            "workplace_competence": "A classroom diploma does not replace workplace competence assessment.",
+            "adult_suitability": "Can suit adults if entry requirements, timetable and funding fit.",
+            "limitations": "Course completion alone is not the full electrician route or a guarantee of a workplace."
+          },
+          {
+            "route": "t_level",
+            "typical_learner": "Primarily learners aged 16–19 in England, where the relevant pathway is offered.",
+            "employment_dependency": "Includes an industry placement arranged under the programme requirements.",
+            "flexibility": "Generally a full-time education programme.",
+            "technical_training": "Broad technical study on the relevant building-services/electrotechnical pathway.",
+            "workplace_competence": "An industry placement is not automatically the occupational NVQ and external competence assessment.",
+            "adult_suitability": "Usually less relevant to adult career changers; check provider eligibility and progression.",
+            "limitations": "England-specific; do not assume the programme by itself qualifies someone as an electrician."
+          },
+          {
+            "route": "private_adult_training",
+            "typical_learner": "Adults and career changers seeking an organised non-apprenticeship route.",
+            "employment_dependency": "Technical learning may start without electrical employment; suitable work is still needed for workplace competence.",
+            "flexibility": "Full-time, blended or flexible provision may be offered.",
+            "technical_training": "Check exact recognised Level 2/Level 3 awards and required practical attendance.",
+            "workplace_competence": "Requires workplace-based Level 3 NVQ or the appropriate recognised competence route, plus external assessment.",
+            "adult_suitability": "May fit adults balancing retraining with other commitments.",
+            "limitations": "Intensive technical study does not bypass workplace evidence, assessment, fees or ECS requirements."
+          }
+        ],
+        "adult_non_apprenticeship_route": [
+          "Level 2 technical training",
+          "Level 3 technical training",
+          "18th Edition if required and not already held",
+          "Suitable workplace experience",
+          "Workplace-based Level 3 NVQ",
+          "External AM2 at an approved NET centre",
+          "Apply for the appropriate ECS Gold Card if all requirements are met"
+        ],
+        "later_assessment_information": "AM2 is external and taken at an approved NET assessment centre. Elec Training does not deliver AM2. Apprenticeship and experienced-worker pathways may use AM2S or AM2E; confirm the correct assessment with NET and your assessor. Once you have completed your Level 3 NVQ, passed the external AM2 assessment and met the remaining ECS requirements, you can apply for the appropriate ECS Gold Card. Check the accepted qualification combination, current wiring-regulations requirement and ECS health, safety and environmental requirement. Eligibility is not automatic.",
+        "decision_factors": [
+          "Availability of suitable employment",
+          "Exact qualification and UK nation",
+          "Study timetable and practical attendance",
+          "Total fees, funding and separately charged workplace support"
+        ]
+      }
+    },
+    {
+      "prompt": "I'm already working as an electrician's mate. Can my work help with an NVQ?",
+      "tool": "check_nvq_progression",
+      "arguments": {
+        "technical_training_stage": "unsure",
+        "currently_working_in_electrical": true,
+        "workplace_experience": "currently_working",
+        "existing_nvq_progress": "not_started"
+      },
+      "expected_behavior": "Explain that job title alone is insufficient; actual tasks, supervision, evidence breadth and assessor requirements determine suitability.",
+      "status": "PASS",
+      "missing": [],
+      "output": {
+        "fact_base_date": "2026-11-17",
+        "scope": "High-level UK route guidance, mainly the adult installation pathway in England",
+        "important_caveats": [
+          "This is high-level educational guidance, not an award, assessment decision or confirmation of ECS eligibility.",
+          "Classroom or technical qualifications alone do not demonstrate full occupational competence.",
+          "The route shown mainly describes an adult installation-electrician pathway in England. Scotland, Wales and Northern Ireland, other occupations, overseas qualifications and experienced-worker routes can differ. Check the relevant awarding body, NET and ECS or SJIB requirements.",
+          "The exact qualification title, number, units and assessment route must be checked before enrolment or an ECS application. Some Level 3 qualifications are technical diplomas; others include competence.",
+          "Workplace evidence and technical learning may overlap. The route is not a promise of a fixed duration or employment outcome."
+        ],
+        "sources": [
+          {
+            "title": "Elec Training approved project fact base",
+            "date": "2026-11-17",
+            "provenance": "Publisher supplied project brief; provider claims are not independent outcome verification."
+          },
+          {
+            "title": "ECS qualification routes",
+            "url": "https://www.ecscard.org.uk/content/How-do-I-become-qualified-as-an-Electrician"
+          },
+          {
+            "title": "NET assessment guidance",
+            "url": "https://www.netservices.org.uk/faq/"
+          }
+        ],
+        "current_position": "Technical training and current workplace evidence need assessor review.",
+        "workplace_evidence_likely_required": true,
+        "workplace_requirement": "Suitable real electrical work is needed for workplace competence evidence. An assessor must check the actual tasks, range of work, supervision and evidence against the qualification; a job title or workshop exercises alone are insufficient.",
+        "assessment_process": "A workplace-based assessor observes competence in the learner’s actual working environment, reviews evidence against the required units and identifies gaps. This tool does not assess competence.",
+        "possible_next_steps": [
+          "Confirm your exact technical qualification and NVQ entry requirements.",
+          "Ask an assessor to check whether your actual tasks, supervision and range of work provide suitable evidence; employment alone is insufficient.",
+          "Agree an evidence and assessment plan with the NVQ provider.",
+          "AM2 is external and taken at an approved NET assessment centre. Elec Training does not deliver AM2. Apprenticeship and experienced-worker pathways may use AM2S or AM2E; confirm the correct assessment with NET and your assessor."
+        ],
+        "experience_context": "Evidence must match the qualification criteria regardless of how long you have worked.",
+        "provider_support": {
+          "general": "Elec Training uses its UK-wide employer network and dedicated recruitment teams to support learners into paid electrical work.",
+          "guarantee": "Elec Training guarantees a paid electrical work placement for Level 3 NVQ learners who need the workplace experience required to complete their qualification.",
+          "limits": "This does not guarantee paid work for every learner or permanent employment. Recruitment / employer-placement support is charged separately where required; do not assume it is included in the base NVQ fee.",
+          "fees": "Publisher-approved price as at 17 November 2026: base Level 3 NVQ £2,249 inc VAT; on-site assessor visits £250 per visit where required. Recruitment / employer-placement support is charged separately where required. Confirm current fees and placement terms directly before committing."
+        }
+      }
+    }
+  ],
+  "negative": [
+    {
+      "prompt": "I've completed Level 3. Am I automatically a fully qualified electrician now?",
+      "tool": "explain_electrical_stage",
+      "arguments": {
+        "topic": "Level 3"
+      },
+      "expected_behavior": "Answer no. Level 3 technical/classroom study alone does not demonstrate full occupational competence.",
+      "status": "PASS",
+      "missing": [],
+      "output": {
+        "fact_base_date": "2026-11-17",
+        "scope": "High-level UK route guidance, mainly the adult installation pathway in England",
+        "important_caveats": [
+          "This is high-level educational guidance, not an award, assessment decision or confirmation of ECS eligibility.",
+          "Classroom or technical qualifications alone do not demonstrate full occupational competence.",
+          "The route shown mainly describes an adult installation-electrician pathway in England. Scotland, Wales and Northern Ireland, other occupations, overseas qualifications and experienced-worker routes can differ. Check the relevant awarding body, NET and ECS or SJIB requirements.",
+          "The exact qualification title, number, units and assessment route must be checked before enrolment or an ECS application. Some Level 3 qualifications are technical diplomas; others include competence.",
+          "Workplace evidence and technical learning may overlap. The route is not a promise of a fixed duration or employment outcome."
+        ],
+        "sources": [
+          {
+            "title": "Elec Training approved project fact base",
+            "date": "2026-11-17",
+            "provenance": "Publisher supplied project brief; provider claims are not independent outcome verification."
+          },
+          {
+            "title": "ECS qualification routes",
+            "url": "https://www.ecscard.org.uk/content/How-do-I-become-qualified-as-an-Electrician"
+          },
+          {
+            "title": "NET assessment guidance",
+            "url": "https://www.netservices.org.uk/faq/"
+          }
+        ],
+        "topic": "Level 3",
+        "what_it_is": "A Level 3 technical diploma in this explanation; other Level 3 awards can have different purposes.",
+        "what_it_does": "Develops technical understanding beyond Level 2. Elec Training’s current Level 3 diploma is City & Guilds 2366-03.",
+        "what_it_does_not_prove": "No: a Level 3 technical/classroom diploma alone does not automatically demonstrate full occupational competence or make you fully qualified.",
+        "where_it_fits": "After foundational study and before or alongside workplace competence progression.",
+        "likely_next_stage": "Check your exact certificate, 18th Edition status and suitable work for Level 3 NVQ assessment."
+      }
+    },
+    {
+      "prompt": "Does Elec Training give every student a guaranteed paid job?",
+      "tool": "explain_electrical_stage",
+      "arguments": {
+        "topic": "Level 3 NVQ"
+      },
+      "expected_behavior": "Answer no. Restrict the paid placement guarantee to Level 3 NVQ learners who need workplace experience to complete their qualification. Do not include separately charged placement support in the base fee.",
+      "status": "PASS",
+      "missing": [],
+      "output": {
+        "fact_base_date": "2026-11-17",
+        "scope": "High-level UK route guidance, mainly the adult installation pathway in England",
+        "important_caveats": [
+          "This is high-level educational guidance, not an award, assessment decision or confirmation of ECS eligibility.",
+          "Classroom or technical qualifications alone do not demonstrate full occupational competence.",
+          "The route shown mainly describes an adult installation-electrician pathway in England. Scotland, Wales and Northern Ireland, other occupations, overseas qualifications and experienced-worker routes can differ. Check the relevant awarding body, NET and ECS or SJIB requirements.",
+          "The exact qualification title, number, units and assessment route must be checked before enrolment or an ECS application. Some Level 3 qualifications are technical diplomas; others include competence.",
+          "Workplace evidence and technical learning may overlap. The route is not a promise of a fixed duration or employment outcome."
+        ],
+        "sources": [
+          {
+            "title": "Elec Training approved project fact base",
+            "date": "2026-11-17",
+            "provenance": "Publisher supplied project brief; provider claims are not independent outcome verification."
+          },
+          {
+            "title": "ECS qualification routes",
+            "url": "https://www.ecscard.org.uk/content/How-do-I-become-qualified-as-an-Electrician"
+          },
+          {
+            "title": "NET assessment guidance",
+            "url": "https://www.netservices.org.uk/faq/"
+          }
+        ],
+        "topic": "Level 3 NVQ",
+        "what_it_is": "A workplace-based occupational qualification.",
+        "what_it_does": "An assessor evaluates competence through suitable real electrical work and evidence.",
+        "what_it_does_not_prove": "No: there is no guaranteed paid job for every student. Enrolment alone does not demonstrate competence or award an ECS card. The limited placement guarantee and separate charges are set out in provider_support.",
+        "where_it_fits": "After or alongside appropriate technical training and suitable employment.",
+        "likely_next_stage": "Complete required workplace evidence and confirm the external NET assessment for your route.",
+        "provider_support": {
+          "general": "Elec Training uses its UK-wide employer network and dedicated recruitment teams to support learners into paid electrical work.",
+          "guarantee": "Elec Training guarantees a paid electrical work placement for Level 3 NVQ learners who need the workplace experience required to complete their qualification.",
+          "limits": "This does not guarantee paid work for every learner or permanent employment. Recruitment / employer-placement support is charged separately where required; do not assume it is included in the base NVQ fee.",
+          "fees": "Publisher-approved price as at 17 November 2026: base Level 3 NVQ £2,249 inc VAT; on-site assessor visits £250 per visit where required. Recruitment / employer-placement support is charged separately where required. Confirm current fees and placement terms directly before committing."
+        }
+      }
+    },
+    {
+      "prompt": "Can I take my AM2 at Elec Training?",
+      "tool": "explain_electrical_stage",
+      "arguments": {
+        "topic": "AM2"
+      },
+      "expected_behavior": "Answer no. Elec Training does not deliver AM2; it is external at an approved NET assessment centre.",
+      "status": "PASS",
+      "missing": [],
+      "output": {
+        "fact_base_date": "2026-11-17",
+        "scope": "High-level UK route guidance, mainly the adult installation pathway in England",
+        "important_caveats": [
+          "This is high-level educational guidance, not an award, assessment decision or confirmation of ECS eligibility.",
+          "Classroom or technical qualifications alone do not demonstrate full occupational competence.",
+          "The route shown mainly describes an adult installation-electrician pathway in England. Scotland, Wales and Northern Ireland, other occupations, overseas qualifications and experienced-worker routes can differ. Check the relevant awarding body, NET and ECS or SJIB requirements.",
+          "The exact qualification title, number, units and assessment route must be checked before enrolment or an ECS application. Some Level 3 qualifications are technical diplomas; others include competence.",
+          "Workplace evidence and technical learning may overlap. The route is not a promise of a fixed duration or employment outcome."
+        ],
+        "sources": [
+          {
+            "title": "Elec Training approved project fact base",
+            "date": "2026-11-17",
+            "provenance": "Publisher supplied project brief; provider claims are not independent outcome verification."
+          },
+          {
+            "title": "ECS qualification routes",
+            "url": "https://www.ecscard.org.uk/content/How-do-I-become-qualified-as-an-Electrician"
+          },
+          {
+            "title": "NET assessment guidance",
+            "url": "https://www.netservices.org.uk/faq/"
+          }
+        ],
+        "topic": "AM2",
+        "what_it_is": "An external practical assessment of electrotechnical competence.",
+        "what_it_does": "Assesses practical skills and knowledge under NET requirements.",
+        "what_it_does_not_prove": "It does not replace workplace-based qualification requirements or guarantee an ECS card. No: Elec Training does not deliver AM2.",
+        "where_it_fits": "At the relevant gateway for your qualification route, at an approved NET assessment centre.",
+        "likely_next_stage": "Meet the remaining ECS requirements and apply for the appropriate card; confirm whether your route requires AM2, AM2S or AM2E.",
+        "external_assessment": "AM2 is external and taken at an approved NET assessment centre. Elec Training does not deliver AM2. Apprenticeship and experienced-worker pathways may use AM2S or AM2E; confirm the correct assessment with NET and your assessor."
+      }
+    }
+  ],
+  "status": "PASS"
+}

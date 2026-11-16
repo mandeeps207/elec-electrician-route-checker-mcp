@@ -1,0 +1,107 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "electrician-route-checker",
+  "version": "1.0.0",
+  "description": "Plan your UK electrician training and qualification route",
+  "author": {
+    "name": "Elec Training Ltd",
+    "url": "https://elec.training/"
+  },
+  "homepage": "https://elec.training/",
+  "repository": "https://github.com/mandeeps207/elec-electrician-route-checker-mcp",
+  "keywords": [
+    "education",
+    "electrician",
+    "training",
+    "career"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Electrician Route Checker",
+        "shortDescription": "Plan your UK electrician route",
+        "longDescription": "Understand UK electrician training routes based on your current experience and qualifications. Electrician Route Checker explains Level 2, Level 3, 18th Edition, workplace-based Level 3 NVQ progression, external AM2 and appropriate ECS Gold Card eligibility. This provides high-level educational guidance, mainly for the adult installation pathway in England; requirements can differ by UK nation and occupation. It does not assess competence or confirm qualification/card eligibility.",
+        "developerName": "Elec Training Ltd",
+        "category": "Education",
+        "capabilities": [
+          "Educational route guidance",
+          "Qualification explanations",
+          "NVQ workplace progression",
+          "Training route comparisons"
+        ],
+        "websiteURL": "https://elec.training/",
+        "supportURL": "https://elec.training/contact-us/",
+        "privacyPolicyURL": "https://elec.training/privacy-policy/",
+        "defaultPrompt": [
+          "How do I become an electrician in the UK as an adult?",
+          "I've completed Level 3 electrical training. What should I do next?",
+          "How can I complete an electrical NVQ if I don't have suitable workplace experience?"
+        ],
+        "brandColor": "#112e59",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Adult complete beginner",
+              "prompt": "I'm 35, have no electrical qualifications and want to become an electrician. Where do I start?",
+              "tools_triggered": "get_electrician_route",
+              "expected_behavior": "Recognise a complete beginner, explain Level 2 and the high-level adult route, and distinguish technical training from workplace competence."
+            },
+            {
+              "description": "Progression after Level 2",
+              "prompt": "I've finished Level 2 Electrical Installation. What comes next?",
+              "tools_triggered": "get_electrician_route",
+              "expected_behavior": "Explain suitable Level 3, 18th Edition if needed, workplace/NVQ progression, external AM2 and conditional ECS card eligibility."
+            },
+            {
+              "description": "Level 3 without electrical site experience",
+              "prompt": "I've completed Level 3 but I don't have electrical site experience. What should I do?",
+              "tools_triggered": "get_electrician_route",
+              "expected_behavior": "Clarify the exact Level 3 award, explain technical study alone is insufficient, suitable real work, NVQ competence progression and the limited Elec Training placement guarantee with separate support charges."
+            },
+            {
+              "description": "Qualifying without an apprenticeship",
+              "prompt": "Can I become an electrician without doing an apprenticeship?",
+              "tools_triggered": "compare_electrician_routes",
+              "expected_behavior": "Answer yes, explain the adult non-apprenticeship route, workplace competence, later NVQ, external AM2 and ECS progression; do not declare one route universally best."
+            },
+            {
+              "description": "Electrician’s mate workplace evidence",
+              "prompt": "I'm already working as an electrician's mate. Can my work help with an NVQ?",
+              "tools_triggered": "check_nvq_progression",
+              "expected_behavior": "Explain that job title alone is insufficient; actual tasks, supervision, evidence breadth and assessor requirements determine suitability."
+            }
+          ],
+          "negative": [
+            {
+              "description": "No automatic qualification from technical Level 3",
+              "prompt": "I've completed Level 3. Am I automatically a fully qualified electrician now?",
+              "expected_behavior": "Answer no. Level 3 technical/classroom study alone does not demonstrate full occupational competence."
+            },
+            {
+              "description": "No universal paid job guarantee",
+              "prompt": "Does Elec Training give every student a guaranteed paid job?",
+              "expected_behavior": "Answer no. Restrict the paid placement guarantee to Level 3 NVQ learners who need workplace experience to complete their qualification. Do not include separately charged placement support in the base fee."
+            },
+            {
+              "description": "AM2 is external",
+              "prompt": "Can I take my AM2 at Elec Training?",
+              "expected_behavior": "Answer no. Elec Training does not deliver AM2; it is external at an approved NET assessment centre."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "The tools provide educational information only. They do not sell products, accept payments, collect leads or submit forms. Optional relevant external route-checker links are not required to use the tools."
+      },
+      "publication": {
+        "countries": [
+          "GB"
+        ],
+        "release_notes": "Initial read-only release with four educational tools for likely electrician routes, qualification stages, NVQ workplace progression and route comparison. No login, contact collection, payments or form submissions."
+      }
+    }
+  }
+}

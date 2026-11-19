@@ -32,6 +32,7 @@
         "websiteURL": "https://elec.training/",
         "supportURL": "https://elec.training/contact-us/",
         "privacyPolicyURL": "https://elec.training/privacy-policy/",
+        "termsOfServiceURL": "https://elec.training/customer-complaints-policy/",
         "defaultPrompt": [
           "How do I become an electrician in the UK as an adult?",
           "I've completed Level 3 electrical training. What should I do next?",

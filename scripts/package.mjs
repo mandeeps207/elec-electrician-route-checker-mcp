@@ -8,7 +8,8 @@ import { reviewMetadata } from '../tests/review-cases.mjs';
 import { VERSION } from '../src/facts.mjs';
 
 export const starterPrompts = ['How do I become an electrician in the UK as an adult?', "I've completed Level 3 electrical training. What should I do next?", "How can I complete an electrical NVQ if I don't have suitable workplace experience?"];
-export function manifest({ termsUrl, demoUrl } = {}) {
+export const selectedTermsUrl = 'https://elec.training/customer-complaints-policy/';
+export function manifest({ termsUrl = selectedTermsUrl, demoUrl } = {}) {
   return { $schema: 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json', name: 'electrician-route-checker', version: VERSION, description: 'Plan your UK electrician training and qualification route', author: { name: 'Elec Training Ltd', url: 'https://elec.training/' }, homepage: 'https://elec.training/', repository: 'https://github.com/mandeeps207/elec-electrician-route-checker-mcp', keywords: ['education', 'electrician', 'training', 'career'], extensions: { 'com.openai': {
     interface: { displayName: 'Electrician Route Checker', shortDescription: 'Plan your UK electrician route', longDescription: 'Understand UK electrician training routes based on your current experience and qualifications. Electrician Route Checker explains Level 2, Level 3, 18th Edition, workplace-based Level 3 NVQ progression, external AM2 and appropriate ECS Gold Card eligibility. This provides high-level educational guidance, mainly for the adult installation pathway in England; requirements can differ by UK nation and occupation. It does not assess competence or confirm qualification/card eligibility.', developerName: 'Elec Training Ltd', category: 'Education', capabilities: ['Educational route guidance', 'Qualification explanations', 'NVQ workplace progression', 'Training route comparisons'], websiteURL: 'https://elec.training/', supportURL: 'https://elec.training/contact-us/', privacyPolicyURL: 'https://elec.training/privacy-policy/', ...(termsUrl ? { termsOfServiceURL: termsUrl } : {}), defaultPrompt: starterPrompts, brandColor: '#112e59', composerIcon: './assets/icon.png', logo: './assets/logo.png' },
     review: { test_cases: reviewMetadata, ...(demoUrl ? { demo_recording_url: demoUrl } : {}), commerce: false, commerce_description: 'The tools provide educational information only. They do not sell products, accept payments, collect leads or submit forms. Optional relevant external route-checker links are not required to use the tools.' }, publication: { countries: ['GB'], release_notes: 'Initial read-only release with four educational tools for likely electrician routes, qualification stages, NVQ workplace progression and route comparison. No login, contact collection, payments or form submissions.' }
@@ -45,7 +46,7 @@ export async function validatePackage(metadata, mcp) {
 }
 export async function main() {
   const endpoint = await checkedUrl('MCP_ENDPOINT', process.env.MCP_ENDPOINT);
-  const termsUrl = await checkedUrl('TERMS_URL', process.env.TERMS_URL);
+  const termsUrl = await checkedUrl('TERMS_URL', process.env.TERMS_URL || selectedTermsUrl);
   const demoUrl = await checkedUrl('DEMO_URL', process.env.DEMO_URL);
   const metadata = manifest({ termsUrl, demoUrl });
   // No authentication is required. Omit auth extensions so the portable upstream schema remains valid.

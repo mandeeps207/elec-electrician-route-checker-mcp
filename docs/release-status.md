@@ -18,7 +18,7 @@ The four-tool MCP service is live on Vercel and passes local and public unauthen
 | Website URL | https://elec.training/ |
 | Support URL | https://elec.training/contact-us/ — proposed existing contact page |
 | Privacy URL | https://elec.training/privacy-policy/ — selected and approved for use by the user on 19 November 2026; already set in package metadata |
-| Terms URL | No suitable approved working URL verified; publisher input required |
+| Terms URL | https://elec.training/customer-complaints-policy/ — user-selected and configured in draft metadata; accessible complaints procedure, suitability as service terms unresolved |
 | Five positive tests | 5/5 PASS locally and on production at the mapped MCP tool-response layer; all five ChatGPT answer-content cases PASS; plugin activity observed for four; Level 3/no-site-experience activity evidence missing |
 | Three negative tests | 3/3 PASS locally and on production at the mapped MCP tool-response layer; all three ChatGPT answers PASS with plugin activity observed; raw tool names and arguments not exposed in screenshots |
 | Demo URL | Not recorded; manual ChatGPT testing has started; script prepared |
@@ -31,7 +31,7 @@ Runtime code, dependency lockfile, Vercel configuration, development instruction
 
 The proposed listing subtitle is **Plan your UK electrician route** because the requested longer subtitle exceeds the current 30-character submission limit. The full requested wording is retained as the package description. Education is proposed; confirm the exact available category in the submission dashboard.
 
-`plugin/plugin.json` is review metadata, not a submission-ready package. It has no invented terms or demo URL. `plugin/mcp.json` contains the working stable production endpoint. The final submission ZIP will be generated after the approved remaining URLs exist. It will have `plugin.json`, `mcp.json`, `skills/` and `assets/` at its root, with no hooks, app references, credentials or placeholder URLs.
+`plugin/plugin.json` is review metadata, not a submission-ready package. It includes the user-selected complaints-policy URL in the terms field and omits the unavailable demo URL. `plugin/mcp.json` contains the working stable production endpoint. The final submission ZIP will be generated after the remaining materials exist and release checks are complete. It will have `plugin.json`, `mcp.json`, `skills/` and `assets/` at its root, with no hooks, app references, credentials or placeholder URLs.
 
 ## Verification completed
 
@@ -60,6 +60,8 @@ The available computer-use inventory returned no browsers or apps, and the in-ap
 The usual `/terms-and-conditions/`, `/terms-conditions/`, `/terms/` and `/terms-of-service/` pages returned HTTP 404 when checked. The contact and privacy pages exist, but the privacy page focuses on website/course use; confirm or extend the existing policy for the actual host’s operational data handling. No new legal policy has been published.
 
 On 19 November 2026 the user instructed use of https://elec.training/privacy-policy/ as the privacy-policy URL. That URL is already configured in the portable metadata and package builder. This records the user's URL selection; no legal text was changed and it does not independently establish policy coverage. The latest user screenshot confirms the installed connection uses the stable production `/mcp` URL, authentication supported/used None, version 1.0.0 and review status DEVELOPMENT. Its developer is still shown as mandeep singh. Refresh tools and app-description editing controls are available in the shown settings page; no refresh outcome is yet observed.
+
+The user subsequently selected https://elec.training/customer-complaints-policy/ for the terms-of-service field and requested publisher correction. The requested URL is saved in the draft manifest and package builder. The page is accessible, but contains complaints-handling procedures rather than general service-use terms, so substantive suitability remains unresolved. Package author and developerName are Elec Training Ltd, with Education, official website, support and privacy values prepared. The installed connection's displayed publisher has not been changed: there is no connected browser/editing capability, and OpenAI's displayed directory publisher depends on the selected verified identity. See `docs/publisher-details.md` for concrete values and the organisation identity step. A metadata draft ZIP is available for review/import and is not a final submission package.
 
 ## Completion sequence
 

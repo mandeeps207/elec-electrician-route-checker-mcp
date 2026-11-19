@@ -8,7 +8,7 @@ test('review metadata and genuine square logo assets conform to current upstream
   await validatePackage(manifest(), mcp);
   const { review, interface: listing } = manifest().extensions['com.openai'];
   assert.equal(review.test_cases.positive.length, 5); assert.equal(review.test_cases.negative.length, 3); assert.equal(listing.defaultPrompt.length, 3);
-  assert.ok(!('demo_recording_url' in review)); assert.ok(!('termsOfServiceURL' in listing));
+  assert.ok(!('demo_recording_url' in review)); assert.equal(listing.termsOfServiceURL, 'https://elec.training/customer-complaints-policy/');
 });
 test('submission packaging stops before writing when the production endpoint is absent', () => {
   const env = { ...process.env }; delete env.MCP_ENDPOINT; delete env.TERMS_URL; delete env.DEMO_URL;

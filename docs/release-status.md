@@ -88,6 +88,8 @@ The subsequent user screenshot confirms the corrected ZIP was accepted: the port
 
 The user supplied the exact portal verification token for the stable production host. It is intentionally published as a plain-text file at `/.well-known/openai-apps-challenge`, with no JSON wrapper or additional tokens. The path was checked first and returned 404, so no existing challenge was overwritten. Public verification-token hosting is separate from API-key handling and does not create credentials. A successful public content check is required before asking the user to verify the domain in the portal; the portal's verification and scan results must still be observed separately.
 
+The challenge is now live on production deployment `dpl_Foutr9HsuFZKjzov45skes2BqEJc`, deployed from commit `7cff9f9`. An unauthenticated HTTPS fetch to https://elec-electrician-route-checker.vercel.app/.well-known/openai-apps-challenge returned HTTP 200, text/plain with UTF-8, and exactly the 43 token bytes with no extra newline. All eight production MCP review cases passed again after deployment. The stable MCP origin has not changed. The user must now click Verify Domain in the portal and then connect/scan the MCP; domain verification is pending until that portal result is observed.
+
 ## Reference documentation
 
 - https://developers.openai.com/plugins/build/plugins

@@ -1,6 +1,6 @@
 {
   "endpoint": "https://elec-electrician-route-checker.vercel.app/mcp",
-  "tested_at": "2026-11-16T21:41:06.926Z",
+  "tested_at": "2026-11-19T11:50:25.867Z",
   "test_layer": "Real MCP SDK client tool calls with curated input mappings. Does not verify ChatGPT tool selection or natural-language answers.",
   "tools": [
     {

@@ -1,6 +1,6 @@
 # Electrician Route Checker
 
-Electrician Route Checker is a read-only educational MCP service published by **Elec Training Ltd**. It helps adults understand common UK electrician training and qualification routes, from technical learning to suitable electrical work, workplace competence assessment and external assessment.
+Electrician Route Checker is a read-only educational MCP service for **Elec Training Ltd**. The client-approved displayed listing developer is mandeep singh. It helps adults understand common UK electrician training and qualification routes, from technical learning to suitable electrical work, workplace competence assessment and external assessment.
 
 ## Available tools
 

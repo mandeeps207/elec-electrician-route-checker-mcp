@@ -71,8 +71,12 @@ The user subsequently selected https://elec.training/customer-complaints-policy/
 4. Confirm the approved existing terms URL, policy coverage and support route. Review `docs/privacy-review.md`; approve changes to existing legal pages if needed.
 5. Connect the production service in ChatGPT using an authenticated developer session. Run all eight prompts and the demo script, capture the requested screenshots, and host the genuine recording at an approved accessible URL.
 6. Run the packaging command with the verified `MCP_ENDPOINT`, `TERMS_URL` and `DEMO_URL`. Inspect its ZIP structure and listing metadata.
-7. Confirm Elec Training Ltd business identity, submission permissions, eligible/global data residency, domain verification and available category. After build/test approval, run the portal connection and automated scan; resolve findings before any public-review submission.
+7. Confirm the approved individual publishing identity's eligibility, submission permissions, eligible/global data residency, domain verification and available category. The client accepts mandeep singh as the displayed publisher; a company-name identity change is not required. After build/test approval, run the portal connection and automated scan; resolve findings before any public-review submission.
 8. Return the complete production package and evidence to the publisher. Submit for public review only after explicit approval, as required by the brief.
+
+## Accepted displayed publisher
+
+The user confirmed with the client that the displayed publisher may remain mandeep singh. The draft developerName is aligned with that name. Elec Training Ltd remains the package author and training provider. The official website and homepage are https://elec.training/. This supersedes earlier requests to change the displayed publisher to the company name. The final public listing's website link must still be checked after release; the latest supplied listing screenshot showed Website unavailable. No public directory listing or link has been verified, and acceptance of the publisher name does not authorise public submission.
 
 ## Reference documentation
 

@@ -16,9 +16,20 @@ Answer content: PASS. The complete visible answer recognises an adult beginner, 
 
 Plugin invocation: OBSERVED. Expanded Worked for 11s activity shows the Elec Training icon with the activity label Explaining the UK Electrician Training Route. This establishes visible plugin activity but does not expose the raw MCP tool name, input arguments or returned payload. The expected tool remains get_electrician_route; exact tool identity and arguments are not independently verified from this screenshot.
 
-## Remaining cases
+## Case summary
 
-Positive case 5: NOT YET OBSERVED in ChatGPT. Its automated production MCP client check already passes, but that result does not replace ChatGPT answer and tool-selection evidence. All three negative cases now pass the visible ChatGPT answer checks with plugin activity observed.
+All five positive and three negative cases pass the visible ChatGPT answer-content checks. Plugin activity is visible for seven cases. The original Level 3/no-site-experience turn's expanded activity is still missing. No supplied screenshot exposes raw MCP tool names, arguments or returned payloads; activity labels are recorded separately from exact protocol verification.
+
+| Case | Answer content | Plugin activity |
+| --- | --- | --- |
+| Positive 1 adult beginner | PASS | Observed |
+| Positive 2 after Level 2 | PASS | Observed |
+| Positive 3 Level 3 without site experience | PASS | Expanded activity not supplied |
+| Positive 4 without apprenticeship | PASS | Observed |
+| Positive 5 electrician's mate and NVQ | PASS | Observed |
+| Negative 1 no automatic qualification from technical Level 3 | PASS | Observed |
+| Negative 2 restricted paid placement guarantee | PASS | Observed |
+| Negative 3 external AM2 | PASS | Observed |
 
 Next requested prompt: I've completed Level 3 but I don't have electrical site experience. What should I do?
 
@@ -34,7 +45,7 @@ Diagnostic rerun: the public production MCP client review again passed all five 
 
 ## Outstanding evidence
 
-Record the final remaining ChatGPT answer case, confirm the Level 3/no-site-experience turn's tool activity, and capture the required genuine production walkthrough and its accessible URL. A user-operated Chrome session is available, but this VS Code session has no connected browser-control surface. Continue guided manual testing unless a supported browser-control connection becomes available. No desktop-app installation is required for the user to perform manual ChatGPT web tests.
+Confirm the Level 3/no-site-experience turn's tool activity and capture the required genuine production walkthrough and its accessible URL. Screenshot images remain in the conversation rather than as saved local evidence files. A user-operated Chrome session is available, but this VS Code session has no connected browser-control surface. Continue guided manual testing unless a supported browser-control connection becomes available. No desktop-app installation is required for the user to perform manual ChatGPT web tests.
 
 ## Negative case 3 after tool refresh
 
@@ -77,3 +88,11 @@ Prompt: Can I become an electrician without doing an apprenticeship?
 Answer content: PASS. The supplied screenshot answers Yes for an installation-electrician route in England and explains college or private technical training, suitable supervised electrical work to demonstrate competence, Level 2 and Level 3 technical learning, 18th Edition if required, workplace-based Level 3 NVQ, external AM2 at a NET-approved centre and a conditional application for the appropriate ECS Gold Card. It states that site experience can develop alongside study and recommends checking that an electrician's mate role covers the required evidence. It does not present one route as universally best or bypass workplace competence requirements.
 
 Plugin invocation: OBSERVED. Expanded Worked for 8s activity shows the Elec Training icon and Comparing Electrician Qualification Routes, consistent with the expected compare_electrician_routes tool. The screenshot does not expose raw tool name, arguments or payload. No error is visible.
+
+## Positive case 5
+
+Prompt: I'm already working as an electrician's mate. Can my work help with an NVQ?
+
+Answer content: PASS. The supplied screenshot explains that the role can provide evidence for a Level 3 Electrical Installation NVQ, subject to an assessor reviewing the electrical tasks personally carried out, breadth of work and supervision. It warns that mainly observing or helping with materials may not provide enough hands-on evidence. It recommends reviewing current duties and exact qualification certificates with an assessor before enrolling, mapping actual work to NVQ units, identifying gaps and arranging supervised opportunities to cover them. It does not treat the job title as sufficient or award competence.
+
+Plugin invocation: OBSERVED. Expanded Worked for 9s activity shows the Elec Training icon and Evaluating Electrical NVQ Progression and Workplace Evidence, consistent with the expected check_nvq_progression tool. Raw tool name, arguments and payload are not visible in the screenshot. No error is visible.

@@ -19,7 +19,7 @@ The four-tool MCP service is live on Vercel and passes local and public unauthen
 | Support URL | https://elec.training/contact-us/ — proposed existing contact page |
 | Privacy URL | https://elec.training/privacy-policy/ — selected and approved for use by the user on 19 November 2026; already set in package metadata |
 | Terms URL | No suitable approved working URL verified; publisher input required |
-| Five positive tests | 5/5 PASS locally and on production at the mapped MCP tool-response layer; four ChatGPT answer cases PASS; Level 3/no-site-experience tool use unverified; electrician's mate case pending |
+| Five positive tests | 5/5 PASS locally and on production at the mapped MCP tool-response layer; all five ChatGPT answer-content cases PASS; plugin activity observed for four; Level 3/no-site-experience activity evidence missing |
 | Three negative tests | 3/3 PASS locally and on production at the mapped MCP tool-response layer; all three ChatGPT answers PASS with plugin activity observed; raw tool names and arguments not exposed in screenshots |
 | Demo URL | Not recorded; manual ChatGPT testing has started; script prepared |
 | OpenAI automated scan | NOT RUN |
@@ -48,6 +48,8 @@ These results verify the service, public client access from the development netw
 Manual ChatGPT testing has since started using screenshots provided by the user. The first beginner response passes the expected content checks and expanded activity visibly shows plugin invocation. The raw tool name and arguments are not exposed in that screenshot. See `docs/chatgpt-test-results.md` for the evidence and remaining cases. The private test listing currently shows an individual developer name, Other category and no website/description; correct the listing and verified publisher identity before submission.
 
 Following tool refresh and successful AM2 and placement-guarantee turns, the user confirmed that the availability popup is no longer appearing. It is not currently reproducing; its root cause was not established. No server fix is claimed.
+
+Manual evaluation now covers all eight review prompts: five positive and three negative answers pass the visible content checks. Seven screenshots show plugin activity; the original Level 3/no-site-experience turn still lacks expanded activity evidence. Screenshots do not expose raw tool names or arguments, and the image attachments have not been saved locally. The demo recording, complete packaged-plugin evaluation and remaining submission gates are still outstanding.
 
 ## Access and evidence outstanding
 

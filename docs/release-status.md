@@ -21,7 +21,7 @@ The four-tool MCP service is live on Vercel and passes local and public unauthen
 | Terms URL | https://elec.training/customer-complaints-policy/ — user-selected and configured in draft metadata; accessible complaints procedure, suitability as service terms unresolved |
 | Five positive tests | 5/5 PASS locally and on production at the mapped MCP tool-response layer; all five ChatGPT answer-content cases PASS; plugin activity observed for four; Level 3/no-site-experience activity evidence missing |
 | Three negative tests | 3/3 PASS locally and on production at the mapped MCP tool-response layer; all three ChatGPT answers PASS with plugin activity observed; raw tool names and arguments not exposed in screenshots |
-| Demo URL | Not recorded; manual ChatGPT testing has started; script prepared |
+| Demo URL | Missing; portal explicitly requires a video walkthrough URL; recording checklist prepared using the eight tested ChatGPT cases |
 | OpenAI automated scan | NOT RUN |
 | Ready for submission | NO |
 
@@ -89,6 +89,8 @@ The subsequent user screenshot confirms the corrected ZIP was accepted: the port
 The user supplied the exact portal verification token for the stable production host. It is intentionally published as a plain-text file at `/.well-known/openai-apps-challenge`, with no JSON wrapper or additional tokens. The path was checked first and returned 404, so no existing challenge was overwritten. Public verification-token hosting is separate from API-key handling and does not create credentials. A successful public content check is required before asking the user to verify the domain in the portal; the portal's verification and scan results must still be observed separately.
 
 The challenge is now live on production deployment `dpl_Foutr9HsuFZKjzov45skes2BqEJc`, deployed from commit `7cff9f9`. An unauthenticated HTTPS fetch to https://elec-electrician-route-checker.vercel.app/.well-known/openai-apps-challenge returned HTTP 200, text/plain with UTF-8, and exactly the 43 token bytes with no extra newline. All eight production MCP review cases passed again after deployment. The stable MCP origin has not changed. The user must now click Verify Domain in the portal and then connect/scan the MCP; domain verification is pending until that portal result is observed.
+
+The latest Review information screenshot shows Countries and translations, Test cases and Negative test cases with completed check marks. Supporting content reports Demo recording URL is required, and its Video walkthrough URL input is editable. Release notes are already populated. The metadata panel visibly imports website https://elec.training/, Education, developer mandeep singh and the selected policy URLs; the skill row shows Checks passed. This is evidence of those displayed fields and skill checks, not confirmation of domain verification, an MCP tool-scan pass, public review approval or publication. A genuine recording link must be added and saved. See docs/demo-script.md for a concise walkthrough plan.
 
 ## Reference documentation
 

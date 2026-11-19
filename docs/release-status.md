@@ -17,7 +17,7 @@ The four-tool MCP service is live on Vercel and passes local and public unauthen
 | Tool 4 compare_electrician_routes | PASS locally and on production through an unauthenticated MCP SDK client |
 | Website URL | https://elec.training/ |
 | Support URL | https://elec.training/contact-us/ — proposed existing contact page |
-| Privacy URL | https://elec.training/privacy-policy/ — coverage review outstanding |
+| Privacy URL | https://elec.training/privacy-policy/ — selected and approved for use by the user on 19 November 2026; already set in package metadata |
 | Terms URL | No suitable approved working URL verified; publisher input required |
 | Five positive tests | 5/5 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT beginner and Level 3 answer content PASS; Level 3 tool use and reported availability alert unresolved; three cases pending |
 | Three negative tests | 3/3 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT evaluation not run |
@@ -54,6 +54,8 @@ The project owners are confirmed: GitHub `mandeeps207` and Vercel `mkwebtecindia
 The available computer-use inventory returned no browsers or apps, and the in-app browser was unavailable. Genuine endpoint/ChatGPT screenshots and a recording could not be captured in this session. No screenshots or recordings have been fabricated. Required evidence still includes the production endpoint, ChatGPT tools, beginner result, Level 3/no-work result, metadata and final package structure.
 
 The usual `/terms-and-conditions/`, `/terms-conditions/`, `/terms/` and `/terms-of-service/` pages returned HTTP 404 when checked. The contact and privacy pages exist, but the privacy page focuses on website/course use; confirm or extend the existing policy for the actual host’s operational data handling. No new legal policy has been published.
+
+On 19 November 2026 the user instructed use of https://elec.training/privacy-policy/ as the privacy-policy URL. That URL is already configured in the portable metadata and package builder. This records the user's URL selection; no legal text was changed and it does not independently establish policy coverage. The latest user screenshot confirms the installed connection uses the stable production `/mcp` URL, authentication supported/used None, version 1.0.0 and review status DEVELOPMENT. Its developer is still shown as mandeep singh. Refresh tools and app-description editing controls are available in the shown settings page; no refresh outcome is yet observed.
 
 ## Completion sequence
 

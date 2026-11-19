@@ -6,6 +6,8 @@ Manual evaluation using screenshots supplied by the user in this conversation. S
 
 The user supplied a ChatGPT plugin page showing Electrician Route Checker, version 1.0.0, and a Try in chat button. The page showed developer mandeep singh, category Other, website Unavailable and no app description. These listing fields need review before submission; the publisher identity must be Elec Training Ltd under its verified publishing identity.
 
+A further settings screenshot supplied on 19 November 2026 confirms connection URL https://elec-electrician-route-checker.vercel.app/mcp, authentication supported None, authentication used None, version 1.0.0 and review status DEVELOPMENT. It shows Refresh tools and an editable app description. It does not expose discovered tool details or a successful refresh result. The user approved https://elec.training/privacy-policy/ for the privacy-policy URL; package metadata already uses this URL.
+
 ## Positive case 1
 
 Prompt: I'm 35, have no electrical qualifications and want to become an electrician. Where do I start?

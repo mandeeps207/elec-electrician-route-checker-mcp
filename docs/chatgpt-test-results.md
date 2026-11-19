@@ -18,7 +18,7 @@ Plugin invocation: OBSERVED. Expanded Worked for 11s activity shows the Elec Tra
 
 ## Remaining cases
 
-Positive cases 2, 4 and 5 and negative cases 1 to 3: NOT YET OBSERVED in ChatGPT. Their automated production MCP client checks already pass, but those results do not replace ChatGPT answer and tool-selection evidence.
+Positive cases 2, 4 and 5 and negative cases 1 and 2: NOT YET OBSERVED in ChatGPT. Their automated production MCP client checks already pass, but those results do not replace ChatGPT answer and tool-selection evidence.
 
 Next requested prompt: I've completed Level 3 but I don't have electrical site experience. What should I do?
 
@@ -34,4 +34,12 @@ Diagnostic rerun: the public production MCP client review again passed all five 
 
 ## Outstanding evidence
 
-Record the remaining seven ChatGPT cases, the required genuine production walkthrough and its accessible URL. A user-operated Chrome session is available, but this VS Code session has no connected browser-control surface. Continue guided manual testing unless a supported browser-control connection becomes available. No desktop-app installation is required for the user to perform manual ChatGPT web tests.
+Record the five remaining ChatGPT answer cases, confirm the Level 3 turn's tool activity, and capture the required genuine production walkthrough and its accessible URL. A user-operated Chrome session is available, but this VS Code session has no connected browser-control surface. Continue guided manual testing unless a supported browser-control connection becomes available. No desktop-app installation is required for the user to perform manual ChatGPT web tests.
+
+## Negative case 3 after tool refresh
+
+The user reported clicking Refresh tools without receiving a message or alert. This alone did not confirm success. Following a request to test in a new chat with the plugin selected, the user supplied a screenshot of the prompt Can I take my AM2 at Elec Training?
+
+Answer content: PASS. The answer explicitly says No, Elec Training does not deliver AM2, and the assessment is taken separately at a NET-approved assessment centre after meeting the relevant route requirements. It asks the learner to confirm the assessment with a provider or NVQ assessor and distinguishes AM2S apprenticeship and AM2E experienced-worker routes without asserting these apply to every learner.
+
+Plugin invocation: OBSERVED. Expanded Worked for 12s activity shows the Elec Training icon and Understanding AM2 Requirements and Electrician Qualification Stages. The expected tool is explain_electrical_stage; the raw tool name, arguments and returned payload are not exposed in this screenshot. No error or availability popup is visible, but the user has not confirmed whether the popup recurred outside the screenshot. Do not mark the earlier intermittent alert resolved solely from this successful turn.

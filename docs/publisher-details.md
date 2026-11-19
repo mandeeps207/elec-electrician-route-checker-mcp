@@ -7,7 +7,7 @@ Prepared on 19 November 2026 for Elec Training Ltd. These values are configured 
 | Plugin name | Electrician Route Checker |
 | Package author | Elec Training Ltd |
 | Developer name in package | mandeep singh — client-approved displayed publisher |
-| Proposed category | Education |
+| Submission category | Education & Research |
 | Short description | Plan your UK electrician route |
 | Website | https://elec.training/ |
 | Support | https://elec.training/contact-us/ |

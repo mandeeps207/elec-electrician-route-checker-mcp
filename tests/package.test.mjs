@@ -21,6 +21,12 @@ test('submission packaging stops before writing when the production endpoint is 
   assert.equal(result.status, 1); assert.match(result.stderr, /MCP_ENDPOINT is required/);
 });
 
+test('portal category validation rejects the former Education value', async () => {
+  const metadata = manifest();
+  metadata.extensions['com.openai'].interface.category = 'Education';
+  await assert.rejects(validatePackage(metadata, {}), /Unsupported OpenAI listing category: Education/);
+});
+
 test('upload ZIP uses matching safe forward-slash paths in local and central headers', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'route-checker-zip-'));
   const destination = join(directory, 'plugin.zip');

@@ -19,8 +19,8 @@ The four-tool MCP service is live on Vercel and passes local and public unauthen
 | Support URL | https://elec.training/contact-us/ — proposed existing contact page |
 | Privacy URL | https://elec.training/privacy-policy/ — selected and approved for use by the user on 19 November 2026; already set in package metadata |
 | Terms URL | No suitable approved working URL verified; publisher input required |
-| Five positive tests | 5/5 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT beginner and Level 3 answer content PASS; Level 3 tool use and reported availability alert unresolved; three cases pending |
-| Three negative tests | 3/3 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT AM2 answer PASS with plugin activity observed; two cases pending |
+| Five positive tests | 5/5 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT beginner and Level 3 answer content PASS; Level 3 tool use unverified; three cases pending |
+| Three negative tests | 3/3 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT AM2 and limited-placement-guarantee answers PASS with plugin activity observed; one case pending |
 | Demo URL | Not recorded; manual ChatGPT testing has started; script prepared |
 | OpenAI automated scan | NOT RUN |
 | Ready for submission | NO |
@@ -46,6 +46,8 @@ The post-deployment Vercel error-log query returned no logs. This is not proof o
 These results verify the service, public client access from the development network and curated mappings, not ChatGPT’s actual tool selection, displayed answer quality, OpenAI’s scan, hosting retention or business identity. `docs/test-results.json` contains local response evidence and `docs/production-test-results.json` contains the public endpoint results.
 
 Manual ChatGPT testing has since started using screenshots provided by the user. The first beginner response passes the expected content checks and expanded activity visibly shows plugin invocation. The raw tool name and arguments are not exposed in that screenshot. See `docs/chatgpt-test-results.md` for the evidence and remaining cases. The private test listing currently shows an individual developer name, Other category and no website/description; correct the listing and verified publisher identity before submission.
+
+Following tool refresh and successful AM2 and placement-guarantee turns, the user confirmed that the availability popup is no longer appearing. It is not currently reproducing; its root cause was not established. No server fix is claimed.
 
 ## Access and evidence outstanding
 

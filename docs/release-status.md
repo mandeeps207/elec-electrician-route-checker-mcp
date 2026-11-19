@@ -20,7 +20,7 @@ The four-tool MCP service is live on Vercel and passes local and public unauthen
 | Privacy URL | https://elec.training/privacy-policy/ — selected and approved for use by the user on 19 November 2026; already set in package metadata |
 | Terms URL | No suitable approved working URL verified; publisher input required |
 | Five positive tests | 5/5 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT beginner and Level 3 answer content PASS; Level 3 tool use unverified; three cases pending |
-| Three negative tests | 3/3 PASS locally and on production at the mapped MCP tool-response layer; ChatGPT AM2 and limited-placement-guarantee answers PASS with plugin activity observed; one case pending |
+| Three negative tests | 3/3 PASS locally and on production at the mapped MCP tool-response layer; all three ChatGPT answers PASS with plugin activity observed; raw tool names and arguments not exposed in screenshots |
 | Demo URL | Not recorded; manual ChatGPT testing has started; script prepared |
 | OpenAI automated scan | NOT RUN |
 | Ready for submission | NO |

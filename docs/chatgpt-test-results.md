@@ -18,7 +18,7 @@ Plugin invocation: OBSERVED. Expanded Worked for 11s activity shows the Elec Tra
 
 ## Remaining cases
 
-Positive cases 2, 4 and 5 and negative case 1: NOT YET OBSERVED in ChatGPT. Their automated production MCP client checks already pass, but those results do not replace ChatGPT answer and tool-selection evidence.
+Positive cases 2, 4 and 5: NOT YET OBSERVED in ChatGPT. Their automated production MCP client checks already pass, but those results do not replace ChatGPT answer and tool-selection evidence. All three negative cases now pass the visible ChatGPT answer checks with plugin activity observed.
 
 Next requested prompt: I've completed Level 3 but I don't have electrical site experience. What should I do?
 
@@ -34,7 +34,7 @@ Diagnostic rerun: the public production MCP client review again passed all five 
 
 ## Outstanding evidence
 
-Record the four remaining ChatGPT answer cases, confirm the Level 3 turn's tool activity, and capture the required genuine production walkthrough and its accessible URL. A user-operated Chrome session is available, but this VS Code session has no connected browser-control surface. Continue guided manual testing unless a supported browser-control connection becomes available. No desktop-app installation is required for the user to perform manual ChatGPT web tests.
+Record the three remaining ChatGPT answer cases, confirm the Level 3/no-site-experience turn's tool activity, and capture the required genuine production walkthrough and its accessible URL. A user-operated Chrome session is available, but this VS Code session has no connected browser-control surface. Continue guided manual testing unless a supported browser-control connection becomes available. No desktop-app installation is required for the user to perform manual ChatGPT web tests.
 
 ## Negative case 3 after tool refresh
 
@@ -53,3 +53,11 @@ Answer content: PASS. The supplied screenshot starts with No and restricts the p
 Plugin invocation: OBSERVED. Expanded Worked for 12s activity shows Used Electrician Route Checker. Raw tool identity, arguments and payload are not exposed.
 
 The user explicitly confirmed that the availability popup is no longer appearing. Status: NOT CURRENTLY REPRODUCING after tool refresh and subsequent successful tests. No root cause has been established, and no server change was made to resolve the alert. The earlier Level 3 turn's exact execution remains unverified; this follow-up does not retroactively establish its tool use.
+
+## Negative case 1
+
+Prompt: I've completed Level 3. Am I automatically a fully qualified electrician now?
+
+Answer content: PASS. The supplied screenshot explicitly says No for a Level 3 technical diploma, distinguishes technical knowledge from occupational competence demonstrated through real electrical work, explains the typical adult installation pathway in England through workplace-based Level 3 NVQ and AM2 at a NET-approved centre, and recommends checking the exact qualification title and number. It recognises that a competence-based Level 3 qualification may imply different remaining steps. No automatic qualification or card eligibility is claimed.
+
+Plugin invocation: OBSERVED. Expanded Worked for 8s activity shows the Elec Training icon and Explaining Level 3 Electrical Qualification Requirements. The expected tool is explain_electrical_stage; raw name, arguments and payload are not exposed in the screenshot. No tool error is visible.

@@ -18,7 +18,7 @@ Plugin invocation: OBSERVED. Expanded Worked for 11s activity shows the Elec Tra
 
 ## Remaining cases
 
-Positive cases 4 and 5: NOT YET OBSERVED in ChatGPT. Their automated production MCP client checks already pass, but those results do not replace ChatGPT answer and tool-selection evidence. All three negative cases now pass the visible ChatGPT answer checks with plugin activity observed.
+Positive case 5: NOT YET OBSERVED in ChatGPT. Its automated production MCP client check already passes, but that result does not replace ChatGPT answer and tool-selection evidence. All three negative cases now pass the visible ChatGPT answer checks with plugin activity observed.
 
 Next requested prompt: I've completed Level 3 but I don't have electrical site experience. What should I do?
 
@@ -34,7 +34,7 @@ Diagnostic rerun: the public production MCP client review again passed all five 
 
 ## Outstanding evidence
 
-Record the two remaining ChatGPT answer cases, confirm the Level 3/no-site-experience turn's tool activity, and capture the required genuine production walkthrough and its accessible URL. A user-operated Chrome session is available, but this VS Code session has no connected browser-control surface. Continue guided manual testing unless a supported browser-control connection becomes available. No desktop-app installation is required for the user to perform manual ChatGPT web tests.
+Record the final remaining ChatGPT answer case, confirm the Level 3/no-site-experience turn's tool activity, and capture the required genuine production walkthrough and its accessible URL. A user-operated Chrome session is available, but this VS Code session has no connected browser-control surface. Continue guided manual testing unless a supported browser-control connection becomes available. No desktop-app installation is required for the user to perform manual ChatGPT web tests.
 
 ## Negative case 3 after tool refresh
 
@@ -69,3 +69,11 @@ Prompt: I've finished Level 2 Electrical Installation. What comes next?
 Answer content: PASS. The supplied screenshot identifies the usual next step as a Level 3 Electrical Installation technical diploma and recommends verifying the exact Level 2 certificate against entry requirements. It explains 18th Edition if required and not already held, supervised work that provides the range of evidence for workplace-based Level 3 NVQ assessment, external AM2 at a NET-approved centre, and an appropriate ECS Gold Card application only after remaining requirements are met. It identifies this as the typical adult installation route in England and does not claim technical course completion alone makes the learner fully qualified.
 
 Plugin invocation: OBSERVED. Expanded Worked for 8s activity shows the Elec Training icon and Explaining the UK Electrician Training Route. The expected tool is get_electrician_route; the screenshot does not expose raw name, arguments or payload. No error is visible.
+
+## Positive case 4
+
+Prompt: Can I become an electrician without doing an apprenticeship?
+
+Answer content: PASS. The supplied screenshot answers Yes for an installation-electrician route in England and explains college or private technical training, suitable supervised electrical work to demonstrate competence, Level 2 and Level 3 technical learning, 18th Edition if required, workplace-based Level 3 NVQ, external AM2 at a NET-approved centre and a conditional application for the appropriate ECS Gold Card. It states that site experience can develop alongside study and recommends checking that an electrician's mate role covers the required evidence. It does not present one route as universally best or bypass workplace competence requirements.
+
+Plugin invocation: OBSERVED. Expanded Worked for 8s activity shows the Elec Training icon and Comparing Electrician Qualification Routes, consistent with the expected compare_electrician_routes tool. The screenshot does not expose raw tool name, arguments or payload. No error is visible.

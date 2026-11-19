@@ -1,6 +1,6 @@
 # Electrician Route Checker build review
 
-Prepared for Elec Training Ltd on 17 November 2026. **Ready for submission: NO.** No OpenAI draft has been uploaded, scanned, submitted or published.
+Prepared for Elec Training Ltd on 17 November 2026 and updated during submission preparation. **Ready for submission: NO.** The user has uploaded the corrected ZIP and created a portal draft. The MCP scan and public-review submission are not yet confirmed; nothing has been published.
 
 The four-tool MCP service is live on Vercel and passes local and public unauthenticated MCP protocol and guidance checks. The working GitHub repository is private. The final submission ZIP is deliberately withheld until approved terms and recording URLs are supplied and verified and the remaining release checks are complete.
 
@@ -83,6 +83,10 @@ The user confirmed with the client that the displayed publisher may remain mande
 The user reached the OpenAI Platform plugin upload screen and attempted the metadata draft ZIP. The portal rejected it as Invalid plugin ZIP with an unsafe assets\\icon.png member path. Investigation found that Windows Compress-Archive had written forward slashes in the central ZIP directory but backslashes in local file headers. Earlier integrity checks examined the central names and missed this inconsistency. No accepted portal draft or successful scan is established by this failed upload.
 
 Both draft and final archive creation now use a portable ZIP writer. A regression check compares every local and central header name, requires safe forward-slash paths and verifies file contents round-trip. Use npm run package:draft to regenerate the corrected draft. The demo remains pending and the selected complaints-policy URL's suitability as terms remains unresolved. Portal validation must be retried with the corrected archive before claiming upload success.
+
+The subsequent user screenshot confirms the corrected ZIP was accepted: the portal shows an Electrician Route Checker draft with its imported subtitle and an MCP connection drawer. Domain status is not verified, no tool findings are available yet, and authentication is No Auth. This supersedes the prior failed-upload state; acceptance does not establish that all metadata/skill checks passed.
+
+The user supplied the exact portal verification token for the stable production host. It is intentionally published as a plain-text file at `/.well-known/openai-apps-challenge`, with no JSON wrapper or additional tokens. The path was checked first and returned 404, so no existing challenge was overwritten. Public verification-token hosting is separate from API-key handling and does not create credentials. A successful public content check is required before asking the user to verify the domain in the portal; the portal's verification and scan results must still be observed separately.
 
 ## Reference documentation
 

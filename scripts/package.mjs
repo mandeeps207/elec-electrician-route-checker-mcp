@@ -1,6 +1,6 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { spawnSync } from 'node:child_process';
+import { writePluginZip } from './zip.mjs';
 import Ajv from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import sharp from 'sharp';
@@ -45,6 +45,14 @@ export async function validatePackage(metadata, mcp) {
   for (const path of [i.logo, i.composerIcon]) { const image = await sharp('plugin/' + path).metadata(); if (image.width !== image.height || image.width < 48 || image.width > 4096) throw new Error('Invalid icon dimensions'); }
 }
 export async function main() {
+  if (process.argv.includes('--draft')) {
+    const metadata = JSON.parse(await readFile('plugin/plugin.json', 'utf8'));
+    const mcp = JSON.parse(await readFile('plugin/mcp.json', 'utf8'));
+    await validatePackage(metadata, mcp);
+    await writePluginZip('plugin', 'dist/electrician-route-checker-metadata-draft.zip');
+    console.log('Validated metadata draft ZIP: ' + resolve('dist/electrician-route-checker-metadata-draft.zip'));
+    return;
+  }
   const endpoint = await checkedUrl('MCP_ENDPOINT', process.env.MCP_ENDPOINT);
   const termsUrl = await checkedUrl('TERMS_URL', process.env.TERMS_URL || selectedTermsUrl);
   const demoUrl = await checkedUrl('DEMO_URL', process.env.DEMO_URL);
@@ -56,9 +64,8 @@ export async function main() {
   await writeFile('plugin/plugin.json', JSON.stringify(metadata, null, 2) + '\n');
   await writeFile('plugin/mcp.json', JSON.stringify(mcp, null, 2) + '\n');
   await mkdir('dist', { recursive: true });
-  // Compress the contents so plugin.json, not an enclosing folder, is at the ZIP root.
-  const result = spawnSync('powershell.exe', ['-NoProfile', '-Command', "Compress-Archive -Path 'plugin/*' -DestinationPath 'dist/electrician-route-checker-1.0.0.zip' -Force"], { encoding: 'utf8', windowsHide: true });
-  if (result.status !== 0) throw new Error(result.stderr || 'ZIP creation failed');
+  // A portable ZIP writer uses forward slashes in both local and central headers.
+  await writePluginZip('plugin', 'dist/electrician-route-checker-1.0.0.zip');
   console.log('Validated submission package: ' + resolve('dist/electrician-route-checker-1.0.0.zip'));
 }
 if (process.argv[1]?.replaceAll('\\', '/').endsWith('/scripts/package.mjs')) main().catch(error => { console.error(error.message); process.exitCode = 1; });

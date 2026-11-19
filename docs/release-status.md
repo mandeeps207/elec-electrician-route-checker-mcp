@@ -78,6 +78,12 @@ The user subsequently selected https://elec.training/customer-complaints-policy/
 
 The user confirmed with the client that the displayed publisher may remain mandeep singh. The draft developerName is aligned with that name. Elec Training Ltd remains the package author and training provider. The official website and homepage are https://elec.training/. This supersedes earlier requests to change the displayed publisher to the company name. The final public listing's website link must still be checked after release; the latest supplied listing screenshot showed Website unavailable. No public directory listing or link has been verified, and acceptance of the publisher name does not authorise public submission.
 
+## Portal upload validation
+
+The user reached the OpenAI Platform plugin upload screen and attempted the metadata draft ZIP. The portal rejected it as Invalid plugin ZIP with an unsafe assets\\icon.png member path. Investigation found that Windows Compress-Archive had written forward slashes in the central ZIP directory but backslashes in local file headers. Earlier integrity checks examined the central names and missed this inconsistency. No accepted portal draft or successful scan is established by this failed upload.
+
+Both draft and final archive creation now use a portable ZIP writer. A regression check compares every local and central header name, requires safe forward-slash paths and verifies file contents round-trip. Use npm run package:draft to regenerate the corrected draft. The demo remains pending and the selected complaints-policy URL's suitability as terms remains unresolved. Portal validation must be retried with the corrected archive before claiming upload success.
+
 ## Reference documentation
 
 - https://developers.openai.com/plugins/build/plugins

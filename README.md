@@ -1,6 +1,25 @@
 # Electrician Route Checker
 
-Electrician Route Checker is a read-only educational MCP service for **Elec Training Ltd**. The client-approved displayed listing developer is mandeep singh. It helps adults understand common UK electrician training and qualification routes, from technical learning to suitable electrical work, workplace competence assessment and external assessment.
+Electrician Route Checker is a read-only Model Context Protocol server from **[Elec Training Ltd](https://elec.training/)** for understanding UK electrician qualification routes, workplace progression and likely next steps based on a user's current qualifications and electrical experience.
+
+It supports electrician route planning, qualification-stage explanations, workplace-based NVQ progression and comparison of apprenticeships, college, T Levels and private adult training. It includes publisher-supplied training options where relevant; current availability and prices must be confirmed with the provider.
+
+## Example prompts
+
+- I have no electrical experience. What route should I take to become an electrician in the UK?
+- I've completed Level 3 but have no workplace experience. What should I do next?
+- Where does the Level 3 NVQ fit into the electrician qualification route?
+- What happens after the NVQ?
+
+## Publisher and support
+
+Elec Training Ltd is a UK-wide electrical training provider for adult learners and career changers, headquartered in Birmingham. The service developer is mandeep singh.
+
+- Headquarters: Bank House, 8 Cherry Street, Birmingham, B2 5AL, United Kingdom
+- Support: enquiry@elec.training or 0330 822 5337
+- [MCP service documentation](https://github.com/mandeeps207/elec-electrician-route-checker-mcp/tree/main/docs)
+
+The repository documentation covers service privacy, publisher details and release status.
 
 ## Available tools
 
@@ -41,7 +60,7 @@ Example MCP `tools/call` parameters after protocol initialisation:
 
 ## Route logic and limits
 
-The common adult installation route is Level 2 → Level 3 technical training → 18th Edition if needed → suitable real electrical work → workplace-based Level 3 NVQ → external AM2 → application for an appropriate ECS Gold Card if remaining requirements are met. Workplace learning can overlap with technical study. Recognised existing awards are taken into account; contradictory starting information is flagged.
+Elec Training's published adult route is **Level 2 → 18th Edition → Level 3 → Level 3 NVQ → external AM2 → ECS Gold Card**. Suitable real electrical work is required for workplace-based NVQ evidence. AM2 is external and Elec Training does not deliver it. ECS Gold Card progression is subject to the relevant ECS requirements. Workplace learning can overlap with technical study. Recognised existing awards are taken into account; contradictory starting information is flagged.
 
 This mainly describes the adult installation pathway in England. Routes and card schemes vary across Scotland, Wales and Northern Ireland, occupations, apprenticeships, experienced workers and overseas learning. A technical diploma is not an occupational competence award. Exact certificate numbers, units, the applicable AM2/AM2S/AM2E assessment, current BS 7671 and ECS/SJIB requirements need direct verification. The service cannot decide qualification or card eligibility.
 
@@ -55,7 +74,7 @@ There are no user accounts, cookies, analytics, prompt store, contact fields, CR
 
 ## Hosting and release
 
-`vercel.json` defines a Node function exposed at `/mcp` and a static service information page. Deploy to a verified intended project/team using production configuration. Keep source private. Confirm a stable public HTTPS production origin, access without authentication and domain verification before packaging. Do not use a temporary preview URL for submission.
+`vercel.json` defines a Node function exposed at `/mcp` and a static service information page. Deploy to a verified intended project/team using production configuration. Keep deployment credentials and secrets private. Confirm a stable public HTTPS production origin, access without authentication and domain verification before packaging. Do not use a temporary preview URL for submission.
 
 Run `MCP_ENDPOINT`-targeted `npm run test:review` against the deployed endpoint; use PowerShell `$env:MCP_ENDPOINT = 'actual endpoint'`. This checks protocol and curated tool outputs, not ChatGPT’s natural-language tool selection. Repeat the eight review prompts in ChatGPT and record the production walkthrough separately.
 

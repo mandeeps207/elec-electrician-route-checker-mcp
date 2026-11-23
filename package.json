@@ -1,5 +1,6 @@
 {
   "name": "elec-electrician-route-checker-mcp",
+  "description": "Electrician Route Checker helps users understand UK electrician qualification routes, workplace-based NVQ progression and likely next steps based on their current qualifications and electrical experience.",
   "version": "1.0.0",
   "private": true,
   "type": "module",

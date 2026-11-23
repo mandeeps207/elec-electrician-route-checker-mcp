@@ -1,0 +1,673 @@
+{
+  "author": "Elec Training Ltd",
+  "authorUrl": "https://elec.training/",
+  "cloudEndpoint": "https://elec-electrician-route-checker.vercel.app/mcp",
+  "description": "Electrician Route Checker helps users understand UK electrician qualification routes, workplace-based NVQ progression and likely next steps based on their current qualifications and electrical experience.",
+  "homepage": "https://elec.training/",
+  "identifier": "mandeeps207-elec-electrician-route-checker-mcp",
+  "name": "Electrician Route Checker",
+  "prompts": [],
+  "resources": [],
+  "tools": [
+    {
+      "name": "get_electrician_route",
+      "title": "Find your likely electrician route",
+      "description": "Explain a likely adult UK electrician training route from general qualifications and work experience. Use for beginners, after Level 2 or technical Level 3, or existing electrical work. Do not send personal details. This does not assess competence or award eligibility.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "starting_point": {
+            "type": "string",
+            "enum": [
+              "complete_beginner",
+              "level_2_completed",
+              "level_3_completed",
+              "already_working_electrical",
+              "construction_or_other_trade",
+              "unsure"
+            ]
+          },
+          "existing_qualifications": {
+            "default": [],
+            "maxItems": 8,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "none",
+                "level_2_technical",
+                "level_3_technical",
+                "18th_edition",
+                "level_3_nvq",
+                "am2",
+                "other_or_overseas",
+                "unsure"
+              ]
+            }
+          },
+          "electrical_work_experience": {
+            "default": "unsure",
+            "type": "string",
+            "enum": [
+              "none",
+              "some",
+              "currently_working",
+              "significant_experience",
+              "unsure"
+            ]
+          },
+          "currently_working_in_electrical": {
+            "default": null,
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "study_preference": {
+            "default": "unsure",
+            "type": "string",
+            "enum": [
+              "full_time",
+              "blended",
+              "flexible",
+              "unsure"
+            ]
+          },
+          "jurisdiction": {
+            "default": "unsure",
+            "type": "string",
+            "enum": [
+              "england",
+              "scotland",
+              "wales",
+              "northern_ireland",
+              "unsure"
+            ]
+          }
+        },
+        "required": [
+          "starting_point"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "fact_base_date": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "important_caveats": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "provenance": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "current_stage": {
+            "type": "string"
+          },
+          "likely_next_step": {
+            "type": "string"
+          },
+          "high_level_route": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "workplace_requirement": {
+            "type": "string"
+          },
+          "later_assessment_information": {
+            "type": "string"
+          },
+          "questions_to_resolve": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "study_options": {
+            "type": "string"
+          },
+          "provider_support": {
+            "type": "object",
+            "properties": {
+              "general": {
+                "type": "string"
+              },
+              "guarantee": {
+                "type": "string"
+              },
+              "limits": {
+                "type": "string"
+              },
+              "fees": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "general",
+              "guarantee",
+              "limits",
+              "fees"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "fact_base_date",
+          "scope",
+          "important_caveats",
+          "sources",
+          "current_stage",
+          "likely_next_step",
+          "high_level_route",
+          "explanation",
+          "workplace_requirement",
+          "later_assessment_information",
+          "questions_to_resolve",
+          "study_options"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "explain_electrical_stage",
+      "title": "Explain an electrical qualification stage",
+      "description": "Explain Level 2, Level 3 technical diplomas, 18th Edition, Level 3 NVQ, workplace evidence, external AM2 or ECS Gold Card requirements. Use for questions about what a stage does and does not prove, whether Level 3 makes someone fully qualified, AM2 at Elec Training, or who qualifies for NVQ placement support.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "enum": [
+              "Level 2",
+              "Level 3",
+              "18th Edition",
+              "Level 3 NVQ",
+              "workplace evidence",
+              "AM2",
+              "ECS Gold Card"
+            ]
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "fact_base_date": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "important_caveats": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "provenance": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "topic": {
+            "type": "string"
+          },
+          "what_it_is": {
+            "type": "string"
+          },
+          "what_it_does": {
+            "type": "string"
+          },
+          "what_it_does_not_prove": {
+            "type": "string"
+          },
+          "where_it_fits": {
+            "type": "string"
+          },
+          "likely_next_stage": {
+            "type": "string"
+          },
+          "external_assessment": {
+            "type": "string"
+          },
+          "provider_support": {
+            "type": "object",
+            "properties": {
+              "general": {
+                "type": "string"
+              },
+              "guarantee": {
+                "type": "string"
+              },
+              "limits": {
+                "type": "string"
+              },
+              "fees": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "general",
+              "guarantee",
+              "limits",
+              "fees"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "fact_base_date",
+          "scope",
+          "important_caveats",
+          "sources",
+          "topic",
+          "what_it_is",
+          "what_it_does",
+          "what_it_does_not_prove",
+          "where_it_fits",
+          "likely_next_stage"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "check_nvq_progression",
+      "title": "Check likely NVQ workplace progression",
+      "description": "Explain likely workplace evidence needs and next steps for electrical NVQ progression, including learners without suitable electrical work and electrician’s mates. Explains the limited Elec Training placement guarantee and separately charged support where relevant. Do not send personal or employer details.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "technical_training_stage": {
+            "type": "string",
+            "enum": [
+              "none",
+              "level_2",
+              "level_3_technical",
+              "other_or_overseas",
+              "unsure"
+            ]
+          },
+          "currently_working_in_electrical": {
+            "default": null,
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "workplace_experience": {
+            "default": "unsure",
+            "type": "string",
+            "enum": [
+              "none",
+              "some",
+              "currently_working",
+              "significant_experience",
+              "unsure"
+            ]
+          },
+          "existing_nvq_progress": {
+            "default": "unsure",
+            "type": "string",
+            "enum": [
+              "not_started",
+              "in_progress",
+              "evidence_gaps",
+              "completed",
+              "unsure"
+            ]
+          }
+        },
+        "required": [
+          "technical_training_stage"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "fact_base_date": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "important_caveats": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "provenance": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "current_position": {
+            "type": "string"
+          },
+          "workplace_evidence_likely_required": {
+            "type": "boolean"
+          },
+          "workplace_requirement": {
+            "type": "string"
+          },
+          "assessment_process": {
+            "type": "string"
+          },
+          "possible_next_steps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "experience_context": {
+            "type": "string"
+          },
+          "provider_support": {
+            "type": "object",
+            "properties": {
+              "general": {
+                "type": "string"
+              },
+              "guarantee": {
+                "type": "string"
+              },
+              "limits": {
+                "type": "string"
+              },
+              "fees": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "general",
+              "guarantee",
+              "limits",
+              "fees"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "fact_base_date",
+          "scope",
+          "important_caveats",
+          "sources",
+          "current_position",
+          "workplace_evidence_likely_required",
+          "workplace_requirement",
+          "assessment_process",
+          "possible_next_steps",
+          "experience_context"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "compare_electrician_routes",
+      "title": "Compare electrician training routes",
+      "description": "Compare apprenticeship, college, T Level and private adult routes by employment, flexibility, technical study and workplace competence. Use when an adult asks whether they can qualify without an apprenticeship. No route is universally best.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "routes": {
+            "maxItems": 4,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "apprenticeship",
+                "college",
+                "t_level",
+                "private_adult_training"
+              ]
+            }
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "fact_base_date": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "important_caveats": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "provenance": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "conclusion": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "route": {
+                  "type": "string"
+                },
+                "typical_learner": {
+                  "type": "string"
+                },
+                "employment_dependency": {
+                  "type": "string"
+                },
+                "flexibility": {
+                  "type": "string"
+                },
+                "technical_training": {
+                  "type": "string"
+                },
+                "workplace_competence": {
+                  "type": "string"
+                },
+                "adult_suitability": {
+                  "type": "string"
+                },
+                "limitations": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "route",
+                "typical_learner",
+                "employment_dependency",
+                "flexibility",
+                "technical_training",
+                "workplace_competence",
+                "adult_suitability",
+                "limitations"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "adult_non_apprenticeship_route": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "later_assessment_information": {
+            "type": "string"
+          },
+          "decision_factors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "fact_base_date",
+          "scope",
+          "important_caveats",
+          "sources",
+          "conclusion",
+          "routes",
+          "adult_non_apprenticeship_route",
+          "later_assessment_information",
+          "decision_factors"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    }
+  ],
+  "version": "1.0.0",
+  "tags": [
+    "electrician",
+    "education",
+    "training",
+    "qualifications",
+    "NVQ",
+    "career-planning"
+  ]
+}

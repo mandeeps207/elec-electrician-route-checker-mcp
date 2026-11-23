@@ -34,7 +34,18 @@ Every tool is annotated read-only, non-destructive, idempotent and bounded (`ope
 
 Production MCP endpoint: **https://elec-electrician-route-checker.vercel.app/mcp**. Hosting: Vercel, project `elec-electrician-route-checker` in `mkwebtecindias-projects`. The stable production alias is used in `plugin/mcp.json`; do not replace it with a deployment-specific preview address. Public unauthenticated MCP tests passed on 17 November 2026. ChatGPT and submission validation remain pending.
 
-## Development
+## Agent skill on Skills.sh
+
+Use the [Electrician Course Route Checker skill](skills/electrician-course-route-checker/SKILL.md) to guide an AI agent through the existing MCP service:
+
+```sh
+npx skills add mandeeps207/elec-electrician-route-checker-mcp --list
+npx skills add mandeeps207/elec-electrician-route-checker-mcp --skill electrician-course-route-checker -a codex
+```
+
+The skill installs instructions, not an MCP connection. Configure the production endpoint above in an MCP-capable client and discover its tool schemas before use. The skill documents Elec Training's approved beginner sequence: Level 2 -> 18th Edition -> Level 3 -> workplace-based Level 3 NVQ -> relevant external AM2 -> appropriate ECS Gold Card pathway. It distinguishes that provider sequence from the service's general route below. Elec Training does not deliver AM2, and an NVQ does not automatically confer ECS Gold Card eligibility.
+
+## Local development
 
 Use Node.js 22, then `npm ci`, `npm test`, `npm run test:review` and `npm start`. The local MCP endpoint is `http://localhost:3000/mcp`. The service uses the official MCP SDK and stateless Streamable HTTP with JSON responses. No API key or database is required. `npm audit` checks the locked dependency tree.
 

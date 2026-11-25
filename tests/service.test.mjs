@@ -6,6 +6,9 @@ import { tools } from '../src/server.mjs';
 import { localServer } from '../src/local.mjs';
 import { positive, negative } from './review-cases.mjs';
 import { getElectricianRoute, checkNvqProgression } from '../src/guidance.mjs';
+import { ImplementationSchema } from '@modelcontextprotocol/sdk/types.js';
+import { readFile } from 'node:fs/promises';
+import sharp from 'sharp';
 
 test('real MCP connection, discovery, every tool, every stage and review case', async () => {
   const s = localServer(); await new Promise(r => s.listen(0, '127.0.0.1', r));
@@ -13,7 +16,29 @@ test('real MCP connection, discovery, every tool, every stage and review case', 
   const client = new Client({ name: 'acceptance', version: '1.0.0' });
   try {
     await client.connect(new StreamableHTTPClientTransport(new URL(url)));
+    const metadata = client.getServerVersion();
+    assert.deepEqual(ImplementationSchema.parse(metadata), metadata);
+    assert.equal(metadata.name, 'electrician-route-checker');
+    assert.equal(metadata.version, '1.0.0');
+    assert.equal(metadata.title, 'Electrician Route Checker');
+    assert.match(metadata.description, /UK electrician qualification routes/);
+    assert.equal(metadata.websiteUrl, 'https://elec.training/');
+    assert.deepEqual(metadata.icons, [{ src: 'https://elec-electrician-route-checker.vercel.app/icon.png', mimeType: 'image/png', sizes: ['512x512'] }]);
+    const icon = await readFile(new URL('../public/icon.png', import.meta.url));
+    assert.deepEqual(icon, await readFile(new URL('../plugin/assets/icon.png', import.meta.url)));
+    const image = await sharp(icon).metadata();
+    assert.equal(image.width, 512); assert.equal(image.height, 512);
+    assert.deepEqual(client.getServerCapabilities(), { tools: { listChanged: true } });
+    assert.match(client.getInstructions(), /Elec Training does not deliver it/);
     const list = await client.listTools(); assert.equal(list.tools.length, 4);
+    function checkDescriptions(schema) {
+      for (const field of Object.values(schema.properties ?? {})) {
+        assert.ok(field.description?.trim(), 'Every returned schema field needs usage documentation');
+        checkDescriptions(field);
+      }
+      if (schema.items) checkDescriptions(schema.items);
+    }
+    for (const tool of list.tools) { checkDescriptions(tool.inputSchema); checkDescriptions(tool.outputSchema); }
     for (const t of list.tools) { assert.equal(t.annotations.readOnlyHint, true); assert.equal(t.annotations.destructiveHint, false); assert.equal(t.annotations.openWorldHint, false); assert.ok(t.outputSchema); }
     for (const c of [...positive, ...negative]) { const result = await client.callTool({ name: c.tools_triggered, arguments: c.args }); assert.ok(!result.isError, c.prompt); const text = JSON.stringify(result.structuredContent).toLowerCase(); for (const expected of c.checks) assert.ok(text.includes(expected.toLowerCase()), `${c.description}: ${expected}`); }
     for (const topic of ['Level 2', 'Level 3', '18th Edition', 'Level 3 NVQ', 'workplace evidence', 'AM2', 'ECS Gold Card']) { const result = await client.callTool({ name: 'explain_electrical_stage', arguments: { topic } }); assert.ok(!result.isError); assert.equal(result.structuredContent.topic, topic); }

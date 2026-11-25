@@ -67,7 +67,7 @@ Example MCP `tools/call` parameters after protocol initialisation:
 {"name":"compare_electrician_routes","arguments":{"routes":["apprenticeship","private_adult_training"]}}
 ```
 
-`tools/list` exposes exact input and output JSON schemas. Inputs use enums and booleans rather than personal free text. Origin checks allow ChatGPT and the OpenAI platform; other browser clients require explicit comma-separated `ALLOWED_ORIGINS`. Server-to-server clients can omit Origin. Application body size is limited to 16 KiB; the host may impose additional limits. No unauthenticated browser origin is automatically reflected. The service exposes POST and OPTIONS only; GET/DELETE return 405 because it maintains no sessions or notification streams.
+`tools/list` exposes exact input and output JSON schemas. Inputs use enums and booleans rather than personal free text. Origin checks allow ChatGPT and the OpenAI platform; other browser clients require explicit comma-separated `ALLOWED_ORIGINS`. Server-to-server clients can omit Origin. Application body size is limited to 16 KiB; the host may impose additional limits. No unauthenticated browser origin is automatically reflected. MCP messages use POST. Browser GET and HEAD requests to `/mcp` receive public setup instructions; MCP GET requests accepting `text/event-stream` and DELETE still return 405 because the service maintains no sessions or notification streams. The public connection manifest is available at `/mcp.json` and `/.well-known/mcp.json`.
 
 ## Route logic and limits
 

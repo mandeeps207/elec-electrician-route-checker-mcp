@@ -50,9 +50,32 @@ test('real MCP connection, discovery, every tool, every stage and review case', 
     const validOrigin = await fetch(url, { method: 'OPTIONS', headers: { Origin: 'https://chatgpt.com' } }); assert.equal(validOrigin.status, 204);
     const malformed = await fetch(url, { method: 'POST', headers, body: '{' }); assert.equal(malformed.status, 400);
     const large = await fetch(url, { method: 'POST', headers, body: JSON.stringify({ value: 'x'.repeat(17000) }) }); assert.equal(large.status, 413);
-    assert.equal((await fetch(url)).status, 405);
+    const setup = await fetch(url, { headers: { Accept: 'text/html' } });
+    assert.equal(setup.status, 200); assert.match(setup.headers.get('content-type'), /text\/html/);
+    const setupHtml = await setup.text();
+    assert.match(setupHtml, /Connect your MCP client/); assert.match(setupHtml, /No authentication or API key is required/);
+    assert.match(setupHtml, /https:\/\/elec-electrician-route-checker.vercel.app\/mcp/);
+    assert.equal(setup.headers.get('vary'), 'Accept');
+    assert.equal((await fetch(url)).status, 200);
+    const head = await fetch(url, { method: 'HEAD', headers: { Accept: 'text/html' } });
+    assert.equal(head.status, 200); assert.equal(await head.text(), '');
+    for (const Accept of ['text/event-stream', 'application/json, text/event-stream', 'text/event-stream, */*']) {
+      const stream = await fetch(url, { headers: { Accept } });
+      assert.equal(stream.status, 405); assert.match(stream.headers.get('allow'), /POST/);
+    }
+    assert.equal((await fetch(url, { method: 'DELETE' })).status, 405);
+    assert.equal((await fetch(url, { headers: { Origin: 'https://untrusted.invalid', Accept: 'text/html' } })).status, 403);
     const init = await fetch(url, { method: 'POST', headers, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'protocol-test', version: '1.0' } } }) }); assert.equal(init.status, 200); assert.equal(init.headers.get('mcp-session-id'), null);
   } finally { await client.close(); await new Promise(r => s.close(r)); }
+});
+
+test('public MCP discovery manifests match the validated plugin connection', async () => {
+  const original = JSON.parse(await readFile(new URL('../plugin/mcp.json', import.meta.url)));
+  for (const path of ['../public/mcp.json', '../public/.well-known/mcp.json']) {
+    const manifest = JSON.parse(await readFile(new URL(path, import.meta.url)));
+    assert.deepEqual(manifest, original);
+    assert.equal(manifest.mcpServers['electrician-route-checker'].url, 'https://elec-electrician-route-checker.vercel.app/mcp');
+  }
 });
 
 test('route branches preserve prior awards, uncertainty and workplace requirements', () => {

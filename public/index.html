@@ -1,8 +1,50 @@
-<!doctype html>
-<html lang="en-GB"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Electrician Route Checker</title>
-<style>body{font:18px/1.6 system-ui,sans-serif;max-width:760px;margin:70px auto;padding:0 24px;color:#102b50}h1{line-height:1.2}code{background:#eef2f7;padding:5px 10px}a{color:#173e70}</style>
-<h1>Electrician Route Checker</h1><p>By Elec Training Ltd</p><p>A read-only educational MCP service explaining likely UK electrician training and qualification routes, technical learning, workplace-based competence assessment and external NET assessment.</p>
-<p>The service has four tools and requires no login. It does not collect contact details, submit forms, enrol learners or award qualifications.</p><p>Connect a compatible MCP client to <code>/mcp</code> using Streamable HTTP.</p>
-<p>Guidance mainly describes the adult installation route in England. Requirements vary by UK nation, occupation, qualification and experience. Technical diplomas alone do not establish occupational competence or automatic ECS card eligibility.</p>
-<p><a href="https://elec.training/">Elec Training</a> · <a href="https://elec.training/contact-us/">Support</a> · <a href="https://elec.training/privacy-policy/">Publisher privacy policy</a></p>
+﻿<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Electrician Route Checker MCP setup</title>
+  <link rel="alternate" type="application/json" href="/mcp.json" title="MCP connection configuration">
+  <style>
+    body{font:17px/1.65 system-ui,sans-serif;max-width:800px;margin:48px auto;padding:0 24px;color:#102b50;background:#fff}
+    h1,h2{line-height:1.25}h2{margin-top:32px}a{color:#173e70}code{overflow-wrap:anywhere}
+    pre{padding:20px;background:#eef2f7;border-radius:8px;overflow-x:auto;font-size:14px;line-height:1.6}
+    pre code{overflow-wrap:normal}li{margin:8px 0}footer{margin-top:40px;font-size:15px}
+  </style>
+</head>
+<body>
+  <h1>Electrician Route Checker</h1>
+  <p>A read-only educational MCP service by <a href="https://elec.training/">Elec Training Ltd</a>.</p>
+  <p>Understand likely UK electrician qualification routes, workplace-based NVQ progression and next steps from general qualifications and electrical experience.</p>
+  <h2>Connect your MCP client</h2>
+  <ol>
+    <li>Open the custom MCP server or connector settings in a client that supports remote Streamable HTTP servers.</li>
+    <li>Name the connection <strong>Electrician Route Checker</strong> and enter <code>https://elec-electrician-route-checker.vercel.app/mcp</code>.</li>
+    <li>Select <strong>Streamable HTTP</strong> where a transport choice is offered. No authentication or API key is required.</li>
+    <li>Connect, discover the four tools, and ask a training-route question. Custom connector availability depends on your client and account.</li>
+  </ol>
+  <p>For clients that accept an MCP JSON configuration, use the following connection details. Some clients use different transport labels; follow your client's documentation.</p>
+  <pre><code>{
+  "mcpServers": {
+    "electrician-route-checker": {
+      "type": "streamable-http",
+      "url": "https://elec-electrician-route-checker.vercel.app/mcp"
+    }
+  }
+}</code></pre>
+  <p><a href="/mcp.json">Download the MCP configuration</a> or read the <a href="https://github.com/mandeeps207/elec-electrician-route-checker-mcp/tree/fix/manufact-metadata">source and service documentation</a>.</p>
+  <h2>Available tools</h2>
+  <ul>
+    <li><code>get_electrician_route</code> suggests likely next stages from reported qualifications and general experience.</li>
+    <li><code>explain_electrical_stage</code> explains technical study, NVQ, workplace evidence, external AM2 and ECS Gold Card requirements.</li>
+    <li><code>check_nvq_progression</code> explains workplace evidence needs and likely NVQ progression.</li>
+    <li><code>compare_electrician_routes</code> compares apprenticeships, college, T Levels and private adult training.</li>
+  </ul>
+  <h2>Try a question</h2>
+  <p>“I have completed Level 3 technical training but have no electrical workplace experience. What should I do next?”</p>
+  <h2>Scope and privacy</h2>
+  <p>Guidance mainly describes the adult installation route in England. Requirements vary by UK nation, occupation, qualification and experience. Technical diplomas alone do not establish occupational competence or automatic ECS card eligibility. AM2 is external; Elec Training does not deliver it.</p>
+  <p>Send only general training information. Do not send personal or employer details. The tools do not collect contact information, submit forms, enrol learners or award qualifications. Hosting infrastructure may process operational metadata; see the service's <a href="https://github.com/mandeeps207/elec-electrician-route-checker-mcp/blob/fix/manufact-metadata/docs/privacy-review.md">privacy notes</a>.</p>
+  <footer><a href="https://elec.training/">Elec Training</a> · <a href="https://elec.training/contact-us/">Support</a> · <a href="https://elec.training/privacy-policy/">Publisher privacy policy</a></footer>
+</body>
 </html>

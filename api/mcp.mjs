@@ -1,5 +1,6 @@
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { createServer } from '../src/server.mjs';
+import { readFile } from 'node:fs/promises';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
@@ -16,7 +17,17 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
     res.writeHead(204, { 'Access-Control-Allow-Methods': 'POST, GET, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Accept, MCP-Protocol-Version, MCP-Session-Id', 'Access-Control-Expose-Headers': 'MCP-Session-Id' }); res.end(); return;
   }
-  if (req.method !== 'POST') { res.setHeader('Allow', 'POST, OPTIONS'); return fail(405, 'Stateless MCP supports POST requests; no server notification stream or session deletion.'); }
+  const accept = String(req.headers.accept ?? '').toLowerCase();
+  // MCP GET requests seek an SSE stream, which this stateless service does not offer.
+  // Ordinary browser and directory requests receive the public setup instructions.
+  if (['GET', 'HEAD'].includes(req.method) && !accept.includes('text/event-stream') && (!accept || accept.includes('text/html') || accept.includes('*/*'))) {
+    const page = await readFile(new URL('../public/index.html', import.meta.url));
+    res.setHeader('Vary', req.headers.origin ? 'Origin, Accept' : 'Accept');
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(req.method === 'HEAD' ? undefined : page);
+    return;
+  }
+  if (req.method !== 'POST') { res.setHeader('Allow', 'POST, GET, HEAD, OPTIONS'); return fail(405, 'Stateless MCP supports POST messages; browser GET requests show setup instructions. No server notification stream or session deletion.'); }
   if (!String(req.headers['content-type'] ?? '').toLowerCase().startsWith('application/json')) return fail(415, 'Use application/json');
   if (Number(req.headers['content-length'] ?? 0) > 16384) return fail(413, 'Request too large');
   let body = req.body;
